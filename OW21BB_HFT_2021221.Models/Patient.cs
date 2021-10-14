@@ -13,9 +13,12 @@ namespace OW21BB_HFT_2021221.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int PatientID { get; set; }
+
+        //Maybe use Social Security Number *Undecided*
         //[MaxLength(9)]
         //[Required]
-        public int SocialSecurityNumber { get; set; }
+        //public int SocialSecurityNumber { get; set; }
 
         [ForeignKey(nameof(Doctor))]
         public int DoctorID { get; set; }
