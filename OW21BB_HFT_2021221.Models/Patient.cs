@@ -32,7 +32,7 @@ namespace OW21BB_HFT_2021221.Models
 
         public string Address { get; set; }
 
-        public string Alldata => $"[{SocialSecurityNumber}] -> {Name} - {Age} - {Address}";
+        public string Alldata => $"[{PatientID}] -> {Name} - {Age} - {Address}";
 
         [NotMapped]
         public virtual Doctor Doctor { get; set; }
