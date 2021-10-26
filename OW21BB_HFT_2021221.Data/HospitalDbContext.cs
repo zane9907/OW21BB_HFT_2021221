@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OW21BB_HFT_2021221.Data
 {
-    class HospitalDbContext : DbContext
+    public class HospitalDbContext : DbContext
     {
         public virtual DbSet<Hospital> Hospitals { get; set; }
         public virtual DbSet<Doctor> Doctors { get; set; }
@@ -37,6 +37,7 @@ namespace OW21BB_HFT_2021221.Data
                 .HasForeignKey(patient => patient.DoctorID)
                 .OnDelete(DeleteBehavior.ClientSetNull);
             });
+
 
             modelBuilder.Entity<Doctor>(entity =>
             {
