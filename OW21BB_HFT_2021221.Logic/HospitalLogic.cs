@@ -11,10 +11,12 @@ namespace OW21BB_HFT_2021221.Logic
     public class HospitalLogic : IHospitalLogic
     {
         HospitalRepository hospitalRepo;
+        DoctorRepository doctorRepository;
 
-        public HospitalLogic(HospitalRepository hospitalRepo)
+        public HospitalLogic(HospitalRepository hospitalRepo, DoctorRepository doctorRepository)
         {
             this.hospitalRepo = hospitalRepo;
+            this.doctorRepository = doctorRepository;
         }
 
         public void AddNewHospital(Hospital hospital)
@@ -25,6 +27,16 @@ namespace OW21BB_HFT_2021221.Logic
         public void DeleteHospital(Hospital t)
         {
             hospitalRepo.Delete(t);
+        }
+
+        public IEnumerable<KeyValuePair<string, int>> DoctorSpecializatonCount()
+        {
+            return (from x in doctorRepository.GetAll()
+                    group x by x.Specialization into g
+                    select new KeyValuePair<string, int>
+                    (
+                        g.Key, g.Count()
+                    )).ToList();
         }
 
         public IEnumerable<Hospital> GetAllBlogs()

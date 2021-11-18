@@ -18,5 +18,8 @@ namespace OW21BB_HFT_2021221.Logic
         void DeleteHospital(Hospital id);
 
         //TODO NON-CRUD
+
+        IEnumerable<KeyValuePair<string, int>> DoctorSpecializatonCount();
+
     }
 }

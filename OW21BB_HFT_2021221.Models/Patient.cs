@@ -32,6 +32,8 @@ namespace OW21BB_HFT_2021221.Models
 
         public string Address { get; set; }
 
+        public string Disease { get; set; }
+
         [NotMapped]
         public string Alldata => $"[{PatientID}] -> {Name} - {Age} - {Address}";
 

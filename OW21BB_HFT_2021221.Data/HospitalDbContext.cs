@@ -53,10 +53,10 @@ namespace OW21BB_HFT_2021221.Data
             Doctor d0 = new Doctor() { DoctorID = 1, Name = "John", Specialization = "Cardiology" };
             Doctor d1 = new Doctor() { DoctorID = 2, Name = "Mark", Specialization = "Neurology" };
 
-            Patient p0 = new Patient() { PatientID = 1, Name = "Elizabeth", Age = 18, Address = "3248, Somwhere, 69 IDontKnow street" };
-            Patient p1 = new Patient() { PatientID = 2, Name = "Ann", Age = 8, Address = "8594, Richmond, 3843 Coulter Lane." };
-            Patient p2 = new Patient() { PatientID = 3, Name = "Michael", Age = 38, Address = "59353, Wibaux, 1837 Tibbs Avenue" };
-            Patient p3 = new Patient() { PatientID = 4, Name = "Josh", Age = 99, Address = "35401, Alabama, 5001 Brookside Drive" };
+            Patient p0 = new Patient() { PatientID = 1, Name = "Elizabeth", Age = 18, Address = "3248, Somwhere, 69 IDontKnow street", Disease = "AIDS" };
+            Patient p1 = new Patient() { PatientID = 2, Name = "Ann", Age = 8, Address = "8594, Richmond, 3843 Coulter Lane.", Disease = "Influenza" };
+            Patient p2 = new Patient() { PatientID = 3, Name = "Michael", Age = 38, Address = "59353, Wibaux, 1837 Tibbs Avenue", Disease = "Malaria" };
+            Patient p3 = new Patient() { PatientID = 4, Name = "Josh", Age = 99, Address = "35401, Alabama, 5001 Brookside Drive", Disease= "Meningitis" };
 
             //h0.Doctors.Add(d0);
             //h0.Doctors.Add(d1);
