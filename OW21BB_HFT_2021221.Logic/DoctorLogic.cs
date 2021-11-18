@@ -17,12 +17,13 @@ namespace OW21BB_HFT_2021221.Logic
             this.doctorRepository = doctorRepository;
         }
 
-        public void AddNewHospital(Doctor doctor)
+
+        public void AddNewDoctor(Doctor doctor)
         {
             doctorRepository.Create(doctor);
         }
 
-        public void DeleteHospital(Doctor doctor)
+        public void DeleteDoctor(Doctor doctor)
         {
             doctorRepository.Delete(doctor);
         }
@@ -32,14 +33,14 @@ namespace OW21BB_HFT_2021221.Logic
             return doctorRepository.GetAll().ToList();
         }
 
-        public Doctor GetHospitalById(int id)
+        public Doctor GetDoctorById(int id)
         {
             return doctorRepository.Get(id);
 
             //TODO exception for id
         }
 
-        public void UpdateHospital(Doctor doctor)
+        public void UpdateDoctor(Doctor doctor)
         {
             doctorRepository.Update(doctor);
         }

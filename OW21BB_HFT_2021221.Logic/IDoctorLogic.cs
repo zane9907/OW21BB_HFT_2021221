@@ -9,11 +9,11 @@ namespace OW21BB_HFT_2021221.Logic
 {
     public interface IDoctorLogic
     {
-        Doctor GetHospitalById(int id);
+        Doctor GetDoctorById(int id);
         IEnumerable<Doctor> GetAllBlogs();
-        void AddNewHospital(Doctor doctor);
-        void UpdateHospital(Doctor doctor);
-        void DeleteHospital(Doctor doctor);
+        void AddNewDoctor(Doctor doctor);
+        void UpdateDoctor(Doctor doctor);
+        void DeleteDoctor(Doctor doctor);
 
         //TODO NON-CRUD
     }
