@@ -12,11 +12,13 @@ namespace OW21BB_HFT_2021221.Logic
     {
         HospitalRepository hospitalRepo;
         DoctorRepository doctorRepository;
+        PatientRepository patientRepository;
 
-        public HospitalLogic(HospitalRepository hospitalRepo, DoctorRepository doctorRepository)
+        public HospitalLogic(HospitalRepository hospitalRepo, DoctorRepository doctorRepository, PatientRepository patientRepository)
         {
             this.hospitalRepo = hospitalRepo;
             this.doctorRepository = doctorRepository;
+            this.patientRepository = patientRepository;
         }
 
         public void AddNewHospital(Hospital hospital)
@@ -39,6 +41,16 @@ namespace OW21BB_HFT_2021221.Logic
                     )).ToList();
         }
 
+        public IEnumerable<KeyValuePair<string, int>> DoctorSpecializatonCountInSpecificHospital(int hospitalID)
+        {
+            return (from x in doctorRepository.GetAll()
+                    group x by x.Specialization into g
+                    select new KeyValuePair<string, int>
+                    (
+                        g.Key, g.Where(y=>y.HospitalID.Equals(hospitalID)).Count()
+                    )).ToList();
+        }
+
         public IEnumerable<Hospital> GetAllBlogs()
         {
             return hospitalRepo.GetAll().ToList();
@@ -49,6 +61,36 @@ namespace OW21BB_HFT_2021221.Logic
             return hospitalRepo.Get(id);
 
             //TODO exception for id
+        }
+
+        public IEnumerable<KeyValuePair<string, int>> PatientsPerHospital()
+        {
+
+
+            var asd = from x in patientRepository.GetAll()
+                      group x by x.DoctorID into g
+                      select new
+                      {
+                          DOCTOR_ID = g.Key,
+                          PAT_NO = g.Count()
+                      };
+
+            var kaka = (from x in doctorRepository.GetAll()
+                       join z in asd on x.DoctorID equals z.DOCTOR_ID
+                       let joinedItem = new { x.DoctorID, x.Name, z.PAT_NO }
+                       join y in hospitalRepo.GetAll() on x.HospitalID equals y.HospitalID
+                       let yes = new { y.Name, z.PAT_NO }
+                       group yes by yes.Name into g
+                       select new KeyValuePair<string, int>
+                       (
+                          g.Key, g.Sum(a => a.PAT_NO)
+                       )).ToList();
+
+
+
+            
+
+            return kaka;
         }
 
         public void UpdateHospital(Hospital hospital)

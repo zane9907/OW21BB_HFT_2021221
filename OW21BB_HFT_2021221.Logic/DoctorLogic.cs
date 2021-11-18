@@ -52,24 +52,40 @@ namespace OW21BB_HFT_2021221.Logic
             //TODO exception for id
         }
 
-        public IEnumerable<KeyValuePair<string, string>> MostCommonDiseasesPerDoctor()
+        public IEnumerable<KeyValuePair<string, int>> AllDiseasesPerDoctor()
         {
+            //var dlist = patientRepository.GetAll().Select(x => x.Disease).ToList();
+
+
             var sub = from x in patientRepository.GetAll()
-                      group x by x.Doctor.Name into g
+                      group x by x.Disease into g
                       select new
                       {
-                          KEY = g.Key,
-                          DISEASE = g.Select(t => t.Disease)
+                          DISEASE = g.Key,
+                          COUNT = g.Count(),
+                          DOCTOR_ID = g.Select(y=>y.DoctorID).SingleOrDefault()
                       };
 
-            return from x in doctorRepository.GetAll()
-                   join z in sub on x.Name equals z.KEY
-                   let joinedItem = new { x.Name, z.DISEASE }
-                   group joinedItem by joinedItem.Name into g
-                   select new KeyValuePair<string, string>
-                   (
-                       g.Key, g.Max(t => t.DISEASE).ToString()
-                   );
+
+
+            //return null;
+            return (from x in doctorRepository.GetAll()
+                    join z in sub on x.DoctorID equals z.DOCTOR_ID
+                    let joinedItem = new { x.DoctorID, x.Name, z.DISEASE }
+                    group joinedItem by joinedItem.Name into g
+                    select new KeyValuePair<string, int>
+                    (
+                       g.Key, g.Select(y=>y.DISEASE).Count()
+
+                    )).ToList();
+
+            //return (from x in patientRepository.GetAll()
+            //        group x by x.Doctor.Name into g
+            //        select new KeyValuePair<string, IEnumerable<string>>
+            //        (
+            //            g.Key, dlist
+            //        )).ToList();
+
         }
 
         public void UpdateDoctor(Doctor doctor)
@@ -77,9 +93,15 @@ namespace OW21BB_HFT_2021221.Logic
             doctorRepository.Update(doctor);
         }
 
-        IEnumerable<KeyValuePair<string, double>> IDoctorLogic.AVGAgeOfDoctorsPatients()
+
+        public IEnumerable<KeyValuePair<string, int>> DiseasePerDoctor(string disease)
         {
-            throw new NotImplementedException();
+            return (from x in patientRepository.GetAll()
+                      group x by x.Doctor.Name into g
+                      select new KeyValuePair<string, int>
+                      (
+                          g.Key, g.Where(y=>y.Disease.Equals(disease)).Count()
+                      )).ToList();
         }
     }
 }
