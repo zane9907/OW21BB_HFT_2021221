@@ -15,8 +15,8 @@ namespace OW21BB_HFT_2021221.Logic
         IEnumerable<Hospital> GetAllBlogs();
         void AddNewHospital(Hospital hospital);
         void UpdateHospital(Hospital hospital);
-        void DeleteHospital(int id);
+        void DeleteHospital(Hospital id);
 
-
+        //TODO NON-CRUD
     }
 }
