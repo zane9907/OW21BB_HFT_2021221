@@ -22,10 +22,10 @@ namespace OW21BB_HFT_2021221.Repository
         public abstract void Delete(T t);
 
 
-        public abstract T Read(int id);
+        public abstract T Get(int id);
         
 
-        public IQueryable<T> ReadAll()
+        public IQueryable<T> GetAll()
         {
             return hpctx.Set<T>();
         }

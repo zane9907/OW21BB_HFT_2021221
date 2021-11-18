@@ -22,19 +22,19 @@ namespace OW21BB_HFT_2021221.Repository
 
         public override void Delete(Doctor t)
         {
-            var doctorDelete = Read(t.DoctorID);
+            var doctorDelete = Get(t.DoctorID);
             hpctx.Doctors.Remove(doctorDelete);
             hpctx.SaveChanges();
         }
 
-        public override Doctor Read(int id)
+        public override Doctor Get(int id)
         {
-            return ReadAll().SingleOrDefault(x => x.DoctorID.Equals(id));
+            return GetAll().SingleOrDefault(x => x.DoctorID.Equals(id));
         }
 
         public override void Update(Doctor t)
         {
-            var doctorUpdate = Read(t.DoctorID);
+            var doctorUpdate = Get(t.DoctorID);
             doctorUpdate.Name = t.Name;
             doctorUpdate.Specialization = t.Specialization;
             hpctx.SaveChanges();

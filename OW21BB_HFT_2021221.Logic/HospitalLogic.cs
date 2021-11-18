@@ -12,6 +12,11 @@ namespace OW21BB_HFT_2021221.Logic
     {
         HospitalRepository hospitalRepo;
 
+        public HospitalLogic(HospitalRepository hospitalRepo)
+        {
+            this.hospitalRepo = hospitalRepo;
+        }
+
         public void AddNewHospital(Hospital hospital)
         {
             hospitalRepo.Create(hospital);
@@ -24,14 +29,14 @@ namespace OW21BB_HFT_2021221.Logic
 
         public IEnumerable<Hospital> GetAllBlogs()
         {
-            return hospitalRepo.ReadAll().ToList();
+            return hospitalRepo.GetAll().ToList();
         }
 
         public Hospital GetHospitalById(int id)
         {
-            return hospitalRepo.Read(id);
+            return hospitalRepo.Get(id);
 
-            //TODO exception
+            //TODO exception for id
         }
 
         public void UpdateHospital(Hospital hospital)
