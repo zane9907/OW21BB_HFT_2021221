@@ -16,7 +16,7 @@ namespace OW21BB_HFT_2021221.Repository
 
         public override void Create(Doctor t)
         {
-            hpctx.Doctors.Add(t);
+            hpctx.Doctors.Add(t);                
             hpctx.SaveChanges();
         }
 
