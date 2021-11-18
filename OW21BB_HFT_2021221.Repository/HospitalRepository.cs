@@ -36,6 +36,7 @@ namespace OW21BB_HFT_2021221.Repository
         {
             var hospitalUpdate = Read(t.HospitalID);
             hospitalUpdate.Name = t.Name;
+            hospitalUpdate.Location = t.Location;
             hpctx.SaveChanges();
         }
     }
