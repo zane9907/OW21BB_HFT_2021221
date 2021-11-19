@@ -53,25 +53,25 @@ namespace OW21BB_HFT_2021221.Data
 
             Doctor d0 = new Doctor() { DoctorID = 1, Name = "John", Specialization = "Cardiology" };
             Doctor d1 = new Doctor() { DoctorID = 2, Name = "Mark", Specialization = "Neurology" };
-            Doctor d2 = new Doctor() { DoctorID = 3, Name = "Mark", Specialization = "Neurology" };
+            Doctor d2 = new Doctor() { DoctorID = 3, Name = "Adam", Specialization = "Pathology" };
 
             Patient p0 = new Patient() { PatientID = 1, Name = "Elizabeth", Age = 18, Address = "420, Somwhere, 69 IDontKnow street", Disease = "AIDS" };
             Patient p1 = new Patient() { PatientID = 2, Name = "Ann", Age = 8, Address = "8594, Richmond, 3843 Coulter Lane.", Disease = "Influenza" };
-            Patient p2 = new Patient() { PatientID = 3, Name = "Michael", Age = 38, Address = "59353, Wibaux, 1837 Tibbs Avenue", Disease = "Malaria" };
+            Patient p2 = new Patient() { PatientID = 3, Name = "Michael", Age = 38, Address = "59353, Wibaux, 1837 Tibbs Avenue", Disease = "Common Cold" };
             Patient p3 = new Patient() { PatientID = 4, Name = "Josh", Age = 99, Address = "35401, Alabama, 5001 Brookside Drive", Disease= "Meningitis" };
-            Patient p4 = new Patient() { PatientID = 5, Name = "Adam", Age = 25, Address = "3532, 1374 Gerald L. Bates Drive", Disease= "AIDS" };
+            Patient p4 = new Patient() { PatientID = 5, Name = "Adam", Age = 25, Address = "3532, 1374 Gerald L. Bates Drive", Disease= "PTSD" };
 
             //-----------------------------------------------------------------------------------------------------------------------------------------------------
 
             Hospital h1 = new Hospital() { HospitalID = 2, Name = "Hospital2", Location = "New York" };
 
-            Doctor d3 = new Doctor() { DoctorID = 4, Name = "John", Specialization = "Cardiology" };
-            Doctor d4 = new Doctor() { DoctorID = 5, Name = "Mark", Specialization = "Neurology" };
+            Doctor d3 = new Doctor() { DoctorID = 4, Name = "David", Specialization = "Surgery" };
+            Doctor d4 = new Doctor() { DoctorID = 5, Name = "George", Specialization = "Urology" };
 
-            Patient p5 = new Patient() { PatientID = 6, Name = "Elizabeth", Age = 46, Address = "420, Somwhere, 69 IDontKnow street", Disease = "AIDS" };
-            Patient p6 = new Patient() { PatientID = 7, Name = "Ann", Age = 8, Address = "8594, Richmond, 3843 Coulter Lane.", Disease = "Influenza" };
-            Patient p7 = new Patient() { PatientID = 8, Name = "Michael", Age = 38, Address = "59353, Wibaux, 1837 Tibbs Avenue", Disease = "Malaria" };
-            Patient p8 = new Patient() { PatientID = 9, Name = "Josh", Age = 99, Address = "35401, Alabama, 5001 Brookside Drive", Disease = "Meningitis" };
+            Patient p5 = new Patient() { PatientID = 6, Name = "Sonya", Age = 46, Address = "420, Somwhere, 69 IDontKnow street", Disease = "Common Cold" };
+            Patient p6 = new Patient() { PatientID = 7, Name = "Edith", Age = 8, Address = "8594, Richmond, 3843 Coulter Lane.", Disease = "Influenza" };
+            Patient p7 = new Patient() { PatientID = 8, Name = "Ákos", Age = 38, Address = "3500, Miskolc, Gagarin u. 52", Disease = "Common Cold" };
+            Patient p8 = new Patient() { PatientID = 9, Name = "Thor", Age = 1500, Address = "	Asgard", Disease = "Tetanus" };
 
 
             //h0.Doctors.Add(d0);
@@ -90,11 +90,11 @@ namespace OW21BB_HFT_2021221.Data
 
             p0.DoctorID = d0.DoctorID;
             p1.DoctorID = d0.DoctorID;
-            p4.DoctorID = d0.DoctorID;
 
             p2.DoctorID = d1.DoctorID;
             p3.DoctorID = d1.DoctorID;
 
+            p4.DoctorID = d2.DoctorID;
             //-----------------------------------
 
             d3.HospitalID = h1.HospitalID;

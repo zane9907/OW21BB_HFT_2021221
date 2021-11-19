@@ -51,16 +51,31 @@ namespace OW21BB_HFT_2021221.Logic
                     )).ToList();
         }
 
-        public IEnumerable<Hospital> GetAllBlogs()
+        public IEnumerable<Hospital> GetAllHospitals()
         {
-            return hospitalRepo.GetAll().ToList();
+            var hospitalList = hospitalRepo.GetAll().ToList();
+            if (hospitalList.Count != 0)
+            {
+                return hospitalList;
+            }
+            else
+            {
+                throw new ListIsEmptyException("GetAllDoctors");
+            }
         }
 
         public Hospital GetHospitalById(int id)
         {
-            return hospitalRepo.Get(id);
+            if (id <= hospitalRepo.GetAll().Count())
+            {
+                return hospitalRepo.Get(id); 
+            }
+            else
+            {
+                throw new IndexOutOfRangeException("{ERROR} ID was too big!");
+            }
 
-            //TODO exception for id
+            
         }
 
         public IEnumerable<KeyValuePair<string, int>> PatientsPerHospital()

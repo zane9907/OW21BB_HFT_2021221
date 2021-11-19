@@ -28,21 +28,50 @@ namespace OW21BB_HFT_2021221.Logic
             patientRepository.Delete(patient);
         }
 
-        public IEnumerable<Patient> GetAllBlogs()
+        public IEnumerable<Patient> GetAllPatients()
         {
-            return patientRepository.GetAll().ToList();
+            var patientList = patientRepository.GetAll().ToList();
+            if (patientList.Count != 0)
+            {
+                return patientList;
+            }
+            else
+            {
+                throw new ListIsEmptyException("GetAllPatients");
+            }
+
         }
 
         public Patient GetPatientById(int id)
         {
-            return patientRepository.Get(id);
+            if (id <= patientRepository.GetAll().Count())
+            {
+                return patientRepository.Get(id); 
+            }
+            else
+            {
+                throw new IndexOutOfRangeException("{ERROR} ID was too big!");
+            }
 
-            //TODO exception for id
+            
         }
 
         public void UpdatePatient(Patient patient)
         {
             patientRepository.Update(patient);
+        }
+
+        public bool IsDiseasePresent(string disease)
+        {
+            var isPresent = patientRepository.GetAll().Any(x => x.Disease.Contains(disease));
+            if (isPresent)
+            {
+                return isPresent;
+            }
+            else
+            {
+                throw new DiseaseIsNotPresentException(disease);
+            }
         }
     }
 }

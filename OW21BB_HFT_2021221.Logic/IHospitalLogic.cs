@@ -12,12 +12,12 @@ namespace OW21BB_HFT_2021221.Logic
     public interface IHospitalLogic
     {
         Hospital GetHospitalById(int id);
-        IEnumerable<Hospital> GetAllBlogs();
+        IEnumerable<Hospital> GetAllHospitals();
         void AddNewHospital(Hospital hospital);
         void UpdateHospital(Hospital hospital);
         void DeleteHospital(Hospital id);
 
-        //TODO NON-CRUD
+        
 
         IEnumerable<KeyValuePair<string, int>> DoctorSpecializatonCount();
         IEnumerable<KeyValuePair<string, int>> DoctorSpecializatonCountInSpecificHospital(int hospitalID);

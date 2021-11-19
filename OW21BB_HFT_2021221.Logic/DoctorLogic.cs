@@ -11,7 +11,7 @@ namespace OW21BB_HFT_2021221.Logic
     public class DoctorLogic : IDoctorLogic
     {
         IRepository<Doctor> doctorRepository;
-        IRepository<Doctor> patientRepository;
+        IRepository<Patient> patientRepository;
 
         public DoctorLogic(IRepository<Doctor> doctorRepository, IRepository<Patient> patientRepository)
         {
@@ -25,11 +25,11 @@ namespace OW21BB_HFT_2021221.Logic
             doctorRepository.Create(doctor);
         }
 
-        public IEnumerable<KeyValuePair<string, double?>> AVGAgeOfDoctorsPatients()
+        public IEnumerable<KeyValuePair<string, double>> AVGAgeOfDoctorsPatients()
         {
             return (from x in patientRepository.GetAll()
                     group x by x.Doctor.Name into g
-                    select new KeyValuePair<string, double?>
+                    select new KeyValuePair<string, double>
                     (
                         g.Key, g.Average(x => x.Age)
                     )).ToList();
@@ -40,9 +40,17 @@ namespace OW21BB_HFT_2021221.Logic
             doctorRepository.Delete(doctor);
         }
 
-        public IEnumerable<Doctor> GetAllBlogs()
+        public IEnumerable<Doctor> GetAllDoctors()
         {
-            return doctorRepository.GetAll().ToList();
+            var doctorList = doctorRepository.GetAll().ToList();
+            if (doctorList.Count != 0)
+            {
+                return doctorList;
+            }
+            else
+            {
+                throw new ListIsEmptyException("GetAllDoctors");
+            }
         }
 
         public Doctor GetDoctorById(int id)
@@ -54,10 +62,10 @@ namespace OW21BB_HFT_2021221.Logic
             }
             else
             {
-                throw new IndexOutOfRangeException("{ERROR} ID was too  big!");
+                throw new IndexOutOfRangeException("{ERROR} ID was too big!");
             }
 
-            //TODO exception for id
+            
         }
 
         public IEnumerable<IEnumerable<string>> AllDiseasesPerDoctor()
@@ -136,5 +144,7 @@ namespace OW21BB_HFT_2021221.Logic
                         g.Key, g.Where(y => y.Disease.Equals(disease)).Count()
                     )).ToList();
         }
+
+        
     }
 }
