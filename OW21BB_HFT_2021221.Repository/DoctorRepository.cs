@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OW21BB_HFT_2021221.Repository
 {
-    public class DoctorRepository : Repository<Doctor>
+    public class DoctorRepository : Repository<Doctor>, IRepository<Doctor>
     {
         public DoctorRepository(HospitalDbContext hpctx) : base(hpctx)
         {

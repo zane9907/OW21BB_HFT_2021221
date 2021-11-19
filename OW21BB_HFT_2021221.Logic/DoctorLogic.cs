@@ -10,10 +10,10 @@ namespace OW21BB_HFT_2021221.Logic
 {
     public class DoctorLogic : IDoctorLogic
     {
-        DoctorRepository doctorRepository;
-        PatientRepository patientRepository;
+        IRepository<Doctor> doctorRepository;
+        IRepository<Doctor> patientRepository;
 
-        public DoctorLogic(DoctorRepository doctorRepository, PatientRepository patientRepository)
+        public DoctorLogic(IRepository<Doctor> doctorRepository, IRepository<Patient> patientRepository)
         {
             this.doctorRepository = doctorRepository;
             this.patientRepository = patientRepository;
@@ -47,7 +47,15 @@ namespace OW21BB_HFT_2021221.Logic
 
         public Doctor GetDoctorById(int id)
         {
-            return doctorRepository.Get(id);
+
+            if (id <= doctorRepository.GetAll().Count())
+            {
+                return doctorRepository.Get(id);
+            }
+            else
+            {
+                throw new IndexOutOfRangeException("{ERROR} ID was too  big!");
+            }
 
             //TODO exception for id
         }

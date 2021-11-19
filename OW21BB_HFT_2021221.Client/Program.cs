@@ -23,20 +23,22 @@ namespace OW21BB_HFT_2021221.Client
             HospitalLogic hospitalLogic = new HospitalLogic(hospitalRepository, doctorRepository, patientRepository);
 
 
-            var asd0 = doctorLogic.AllDiseasesPerDoctor();
-            var doctorNames = doctorRepository.GetAll().Select(x => x.Name).ToList();
+            var item = hospitalLogic.GetHospitalById(1);
 
-            int y = 0;
-            foreach (var item in asd0)
-            {                
-                Console.WriteLine($"DoctorName: {doctorNames[y++]}");
-                Console.WriteLine("Diseases:");
-                foreach (var dis in item)
-                {
-                    Console.WriteLine($"-{dis}");
-                }
-                Console.WriteLine();
-            }
+            //var asd0 = doctorLogic.AllDiseasesPerDoctor();
+            //var doctorNames = doctorRepository.GetAll().Select(x => x.Name).ToList();
+
+            //int y = 0;
+            //foreach (var item in asd0)
+            //{                
+            //    Console.WriteLine($"DoctorName: {doctorNames[y++]}");
+            //    Console.WriteLine("Diseases:");
+            //    foreach (var dis in item)
+            //    {
+            //        Console.WriteLine($"-{dis}");
+            //    }
+            //    Console.WriteLine();
+            //}
 
 
             //var asd1 = doctorLogic.AVGAgeOfDoctorsPatients();

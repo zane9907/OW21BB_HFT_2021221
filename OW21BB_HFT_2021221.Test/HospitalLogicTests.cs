@@ -22,9 +22,9 @@ namespace OW21BB_HFT_2021221.Test
         [SetUp]
         public void Setup()
         {
-            Mock<HospitalRepository> mockedHospRepo = new Mock<HospitalRepository>();
-            Mock<DoctorRepository> mockedDocRepo = new Mock<DoctorRepository>();
-            Mock<PatientRepository> mockedPatRepo = new Mock<PatientRepository>();
+            Mock<IRepository<Hospital>> mockedHospRepo = new Mock<IRepository<Hospital>>();
+            Mock<IRepository<Doctor>> mockedDocRepo = new Mock<IRepository<Doctor>>();
+            Mock<IRepository<Patient>> mockedPatRepo = new Mock<IRepository<Patient>>();
 
             mockedHospRepo.Setup(x => x.Get(It.IsAny<int>())).Returns(
                 new Hospital()
@@ -39,14 +39,24 @@ namespace OW21BB_HFT_2021221.Test
             mockedPatRepo.Setup(x => x.GetAll()).Returns(this.FakePatientObjects);
 
             this.HospitalLogic = new HospitalLogic(mockedHospRepo.Object, mockedDocRepo.Object, mockedPatRepo.Object);
-            this.DoctorLogic = new DoctorLogic( mockedDocRepo.Object, mockedPatRepo.Object);
-            this.PatientLogic = new PatientLogic( mockedPatRepo.Object);
+            this.DoctorLogic = new DoctorLogic(mockedDocRepo.Object, mockedPatRepo.Object);
+            this.PatientLogic = new PatientLogic(mockedPatRepo.Object);
 
         }
 
+        [Test]
+        public void GetOneHospital_ReturnsCorrectInstance()
+        {
+            var hospItem = this.HospitalLogic.GetHospitalById(2);
+
+            Assert.That(hospItem.HospitalID, Is.EqualTo(2));
+        }
+
+
+
         private IQueryable<Hospital> FakeHospitalObjects()
         {
-            #region Data
+            
             Hospital h0 = new Hospital() { HospitalID = 1, Name = "Hospital1", Location = "Budapest" };
 
 
@@ -104,7 +114,7 @@ namespace OW21BB_HFT_2021221.Test
 
             p7.DoctorID = d4.DoctorID;
             p8.DoctorID = d4.DoctorID; 
-            #endregion
+           
 
             List<Hospital> items = new List<Hospital>();
 
@@ -116,7 +126,7 @@ namespace OW21BB_HFT_2021221.Test
 
         private IQueryable<Doctor> FakeDoctorObjects()
         {
-            #region Data
+            
             Hospital h0 = new Hospital() { HospitalID = 1, Name = "Hospital1", Location = "Budapest" };
 
 
@@ -174,7 +184,7 @@ namespace OW21BB_HFT_2021221.Test
 
             p7.DoctorID = d4.DoctorID;
             p8.DoctorID = d4.DoctorID; 
-            #endregion
+            
 
             List<Doctor> items = new List<Doctor>();
 
@@ -189,7 +199,7 @@ namespace OW21BB_HFT_2021221.Test
 
         private IQueryable<Patient> FakePatientObjects()
         {
-            #region Data
+            
             Hospital h0 = new Hospital() { HospitalID = 1, Name = "Hospital1", Location = "Budapest" };
 
 
@@ -247,7 +257,7 @@ namespace OW21BB_HFT_2021221.Test
 
             p7.DoctorID = d4.DoctorID;
             p8.DoctorID = d4.DoctorID;
-            #endregion
+            
 
             List<Patient> items = new List<Patient>();
 

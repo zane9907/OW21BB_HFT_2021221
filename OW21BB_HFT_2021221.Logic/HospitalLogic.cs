@@ -10,11 +10,11 @@ namespace OW21BB_HFT_2021221.Logic
 {
     public class HospitalLogic : IHospitalLogic
     {
-        HospitalRepository hospitalRepo;
-        DoctorRepository doctorRepository;
-        PatientRepository patientRepository;
+        IRepository<Hospital> hospitalRepo;
+        IRepository<Doctor> doctorRepository;
+        IRepository<Patient> patientRepository;
 
-        public HospitalLogic(HospitalRepository hospitalRepo, DoctorRepository doctorRepository, PatientRepository patientRepository)
+        public HospitalLogic(IRepository<Hospital> hospitalRepo, IRepository<Doctor> doctorRepository, IRepository<Patient> patientRepository)
         {
             this.hospitalRepo = hospitalRepo;
             this.doctorRepository = doctorRepository;

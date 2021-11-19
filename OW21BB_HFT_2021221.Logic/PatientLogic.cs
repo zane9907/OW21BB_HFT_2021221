@@ -10,9 +10,9 @@ namespace OW21BB_HFT_2021221.Logic
 {
     public class PatientLogic : IPatientLogic
     {
-        PatientRepository patientRepository;
+        IRepository<Patient> patientRepository;
 
-        public PatientLogic(PatientRepository patientRepository)
+        public PatientLogic(IRepository<Patient> patientRepository)
         {
             this.patientRepository = patientRepository;
         }

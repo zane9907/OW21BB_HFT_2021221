@@ -8,11 +8,12 @@ using System.Threading.Tasks;
 
 namespace OW21BB_HFT_2021221.Repository
 {
-    public class HospitalRepository : Repository<Hospital>
+    public class HospitalRepository : Repository<Hospital>, IRepository<Hospital>
     {
         public HospitalRepository(HospitalDbContext hpctx) : base(hpctx)
         {
         }
+
 
         public override void Create(Hospital t)
         {
