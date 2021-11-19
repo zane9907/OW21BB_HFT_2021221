@@ -59,7 +59,7 @@ namespace OW21BB_HFT_2021221.Data
             Patient p1 = new Patient() { PatientID = 2, Name = "Ann", Age = 8, Address = "8594, Richmond, 3843 Coulter Lane.", Disease = "Influenza" };
             Patient p2 = new Patient() { PatientID = 3, Name = "Michael", Age = 38, Address = "59353, Wibaux, 1837 Tibbs Avenue", Disease = "Malaria" };
             Patient p3 = new Patient() { PatientID = 4, Name = "Josh", Age = 99, Address = "35401, Alabama, 5001 Brookside Drive", Disease= "Meningitis" };
-            Patient p4 = new Patient() { PatientID = 5, Name = "Adam", Age = 25, Address = "3532, 1374 Gerald L. Bates Drive", Disease= "Common cold" };
+            Patient p4 = new Patient() { PatientID = 5, Name = "Adam", Age = 25, Address = "3532, 1374 Gerald L. Bates Drive", Disease= "AIDS" };
 
             //-----------------------------------------------------------------------------------------------------------------------------------------------------
 

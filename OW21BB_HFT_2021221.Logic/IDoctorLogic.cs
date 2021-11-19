@@ -18,7 +18,7 @@ namespace OW21BB_HFT_2021221.Logic
         //TODO NON-CRUD
 
         IEnumerable<KeyValuePair<string, double?>> AVGAgeOfDoctorsPatients();
-        IEnumerable<KeyValuePair<string, int>> AllDiseasesPerDoctor();
+        IEnumerable<IEnumerable<string>> AllDiseasesPerDoctor();
         IEnumerable<KeyValuePair<string, int>> DiseasePerDoctor(string disease);
 
 

@@ -52,39 +52,64 @@ namespace OW21BB_HFT_2021221.Logic
             //TODO exception for id
         }
 
-        public IEnumerable<KeyValuePair<string, int>> AllDiseasesPerDoctor()
+        public IEnumerable<IEnumerable<string>> AllDiseasesPerDoctor()
         {
+
+
+            return doctorRepository.GetAll().Select(x => x.Patients.Select(y => y.Disease).ToList()).ToList();
+
+
+            //TESTS
+
             //var dlist = patientRepository.GetAll().Select(x => x.Disease).ToList();
+            //var doctorName = doctorRepository.GetAll().Select(x => x.Name).ToList();
+
+            //;       
 
 
-            var sub = from x in patientRepository.GetAll()
-                      group x by x.Disease into g
-                      select new
-                      {
-                          DISEASE = g.Key,
-                          COUNT = g.Count(),
-                          DOCTOR_ID = g.Select(y=>y.DoctorID).SingleOrDefault()
-                      };
+
+            //;
+
+            //var asd = (from x in doctorRepository.GetAll()
+            //           group x by x.Name into g
+            //           select new
+            //           {
+            //               KEY = g.Key,
+            //               DISEASE = g.Select(x => x.Patients.Select(y => y.Disease).ToList()).ToList()
+            //           }).ToList();
+
+
+            //var asd = doctors.Select(x => x.Patients.Max(y => y.Disease));
+
+            //;
+            //var sub = from x in patientRepository.GetAll()
+            //          group x by x.Disease into g
+            //          select new
+            //          {
+            //              DISEASE = g.Key,
+            //              COUNT = g.Count(),
+            //              DOCTOR_ID = g.Select(y => y.DoctorID).SingleOrDefault()
+            //          };
 
 
 
             //return null;
-            return (from x in doctorRepository.GetAll()
-                    join z in sub on x.DoctorID equals z.DOCTOR_ID
-                    let joinedItem = new { x.DoctorID, x.Name, z.DISEASE }
-                    group joinedItem by joinedItem.Name into g
-                    select new KeyValuePair<string, int>
-                    (
-                       g.Key, g.Select(y=>y.DISEASE).Count()
+            //return (from x in doctorrepository.getall()
+            //        join z in sub on x.doctorid equals z.doctor_id
+            //        let joineditem = new { x.doctorid, x.name, z.disease }
+            //        group joineditem by joineditem.name into g
+            //        select new keyvaluepair<string, int>()
+            //        {
 
-                    )).ToList();
+            //        }
 
-            //return (from x in patientRepository.GetAll()
-            //        group x by x.Doctor.Name into g
-            //        select new KeyValuePair<string, IEnumerable<string>>
+
+            //return (from x in patientrepository.getall()
+            //        group x by x.doctor.name into g
+            //        select new keyvaluepair<string, ienumerable<string>>
             //        (
-            //            g.Key, dlist
-            //        )).ToList();
+            //            g.key, dlist
+            //        )).tolist();
 
         }
 
@@ -97,11 +122,11 @@ namespace OW21BB_HFT_2021221.Logic
         public IEnumerable<KeyValuePair<string, int>> DiseasePerDoctor(string disease)
         {
             return (from x in patientRepository.GetAll()
-                      group x by x.Doctor.Name into g
-                      select new KeyValuePair<string, int>
-                      (
-                          g.Key, g.Where(y=>y.Disease.Equals(disease)).Count()
-                      )).ToList();
+                    group x by x.Doctor.Name into g
+                    select new KeyValuePair<string, int>
+                    (
+                        g.Key, g.Where(y => y.Disease.Equals(disease)).Count()
+                    )).ToList();
         }
     }
 }
