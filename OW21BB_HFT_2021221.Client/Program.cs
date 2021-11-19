@@ -24,7 +24,6 @@ namespace OW21BB_HFT_2021221.Client
 
 
             var asd0 = doctorLogic.AllDiseasesPerDoctor();
-
             var doctorNames = doctorRepository.GetAll().Select(x => x.Name).ToList();
 
             int y = 0;
