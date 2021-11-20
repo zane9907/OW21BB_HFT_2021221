@@ -63,9 +63,7 @@ namespace OW21BB_HFT_2021221.Logic
             else
             {
                 throw new IndexOutOfRangeException("{ERROR} ID was too big!");
-            }
-
-            
+            }            
         }
 
         public IEnumerable<IEnumerable<string>> AllDiseasesPerDoctor()

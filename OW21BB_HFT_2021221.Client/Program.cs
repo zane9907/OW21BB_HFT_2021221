@@ -41,11 +41,13 @@ namespace OW21BB_HFT_2021221.Client
             }
 
 
+            
+
             var asd1 = doctorLogic.AVGAgeOfDoctorsPatients();
             var asd2 = hospitalLogic.DoctorSpecializatonCount();
             var asd3 = doctorLogic.DiseasePerDoctor("Influenza");
             var asd4 = hospitalLogic.PatientsPerHospital();
-            var asd5 = hospitalLogic.DoctorSpecializatonCountInSpecificHospital(2);
+            var asd5 = hospitalLogic.DoctorSpecializatonCountInSpecificHospital(1);
 
             var asd6 = patientLogic.IsDiseasePresent("PTSD");
             

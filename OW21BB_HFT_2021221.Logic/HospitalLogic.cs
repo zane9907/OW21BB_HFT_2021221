@@ -43,12 +43,15 @@ namespace OW21BB_HFT_2021221.Logic
 
         public IEnumerable<KeyValuePair<string, int>> DoctorSpecializatonCountInSpecificHospital(int hospitalID)
         {
-            return (from x in doctorRepository.GetAll()
-                    group x by x.Specialization into g
-                    select new KeyValuePair<string, int>
-                    (
-                        g.Key, g.Where(y=>y.HospitalID.Equals(hospitalID)).Count()
-                    )).ToList();
+            var asd = (from x in doctorRepository.GetAll()
+                       where x.HospitalID.Equals(hospitalID)
+                       group x by x.Specialization into g
+                       select new KeyValuePair<string, int>
+                       (
+                           g.Key, g.Count()
+                       )).ToList();
+            
+            return asd;
         }
 
         public IEnumerable<Hospital> GetAllHospitals()

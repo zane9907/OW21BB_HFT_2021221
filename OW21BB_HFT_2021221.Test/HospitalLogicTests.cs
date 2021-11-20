@@ -24,7 +24,7 @@ namespace OW21BB_HFT_2021221.Test
         {
             Mock<IRepository<Hospital>> mockedHospRepo = new Mock<IRepository<Hospital>>();
             Mock<IRepository<Doctor>> mockedDocRepo = new Mock<IRepository<Doctor>>();
-            Mock<IRepository<Patient>> mockedPatRepo = new Mock<IRepository<Patient>>();
+            Mock<IRepository<Patient>> mockedPatRepo = new Mock<IRepository<Patient>>();            
 
             mockedHospRepo.Setup(x => x.Get(It.IsAny<int>())).Returns(
                 new Hospital()
@@ -47,9 +47,9 @@ namespace OW21BB_HFT_2021221.Test
         [Test]
         public void GetOneHospital_ReturnsCorrectInstance()
         {
-            var hospItem = this.HospitalLogic.GetHospitalById(2);
+            var hospItem = HospitalLogic.GetHospitalById(2);
 
-            Assert.That(hospItem.HospitalID, Is.EqualTo(2));
+            Assert.That(hospItem.Name, Is.EqualTo("Hospital2"));
         }
 
         [Test]
@@ -61,16 +61,8 @@ namespace OW21BB_HFT_2021221.Test
         [Test]
         public void DoctorSpecializatonCount_ReturnsCorrectNumbers()
         {                      
-            Assert.That(HospitalLogic.DoctorSpecializatonCount().ToList().Count, Is.EqualTo(5));
-            
-        }
-
-        [Test]
-        public void DoctorSpecializatonCountInSpecificHospital_HospitalID_1_ReturnsCorrectNumbers()
-        {
-            Assert.That(() => HospitalLogic.DoctorSpecializatonCountInSpecificHospital(1).ToList().Count, Is.EqualTo(3));
-            //TODO fix not returning correct numbers!!!
-        }
+            Assert.That(HospitalLogic.DoctorSpecializatonCount().ToList().Count, Is.EqualTo(5));            
+        }        
 
         [Test]
         public void PatientsPerHospital_ReturnsCorrectNumbers()
@@ -83,6 +75,13 @@ namespace OW21BB_HFT_2021221.Test
         public void AllDiseasePerDoctor_ReturnsCorrectDoctorsCount()
         {
             Assert.That(DoctorLogic.AllDiseasesPerDoctor().Count(), Is.EqualTo(5));
+        }
+
+        [TestCase(1,3)]
+        [TestCase(2,2)]
+        public void DoctorSpecializatonCountInSpecificHospital_ReturnsCorrectNumbers(int id, int expected)
+        {
+            Assert.That(() => HospitalLogic.DoctorSpecializatonCountInSpecificHospital(id).ToList().Count, Is.EqualTo(expected));            
         }
 
         [TestCase(10)]
