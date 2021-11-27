@@ -24,8 +24,9 @@ namespace OW21BB_HFT_2021221.Test
         {
             Mock<IRepository<Hospital>> mockedHospRepo = new Mock<IRepository<Hospital>>();
             Mock<IRepository<Doctor>> mockedDocRepo = new Mock<IRepository<Doctor>>();
-            Mock<IRepository<Patient>> mockedPatRepo = new Mock<IRepository<Patient>>();            
+            Mock<IRepository<Patient>> mockedPatRepo = new Mock<IRepository<Patient>>();
 
+            
             mockedHospRepo.Setup(x => x.Get(It.IsAny<int>())).Returns(
                 new Hospital()
                 {
