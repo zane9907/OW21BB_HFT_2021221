@@ -71,7 +71,7 @@ namespace OW21BB_HFT_2021221.Data
             Patient p5 = new Patient() { PatientID = 6, Name = "Sonya", Age = 46, Address = "420, Somwhere, 69 IDontKnow street", Disease = "Common Cold" };
             Patient p6 = new Patient() { PatientID = 7, Name = "Edith", Age = 8, Address = "8594, Richmond, 3843 Coulter Lane.", Disease = "Influenza" };
             Patient p7 = new Patient() { PatientID = 8, Name = "Ákos", Age = 38, Address = "3500, Miskolc, Gagarin u. 52", Disease = "Common Cold" };
-            Patient p8 = new Patient() { PatientID = 9, Name = "Thor", Age = 1500, Address = "	Asgard", Disease = "Tetanus" };
+            Patient p8 = new Patient() { PatientID = 9, Name = "Thor", Age = 1500, Address = "Asgard", Disease = "Tetanus" };
 
 
             //h0.Doctors.Add(d0);

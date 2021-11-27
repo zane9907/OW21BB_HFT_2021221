@@ -13,7 +13,7 @@ namespace OW21BB_HFT_2021221.Logic
         IEnumerable<Doctor> GetAllDoctors();
         void AddNewDoctor(Doctor doctor);
         void UpdateDoctor(Doctor doctor);
-        void DeleteDoctor(int doctor);
+        void DeleteDoctor(int id);
 
         
 
