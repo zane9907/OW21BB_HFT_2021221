@@ -29,7 +29,7 @@ namespace OW21BB_HFT_2021221.Endpoint
             services.AddTransient<IRepository<Doctor>, DoctorRepository>();
             services.AddTransient<IRepository<Patient>, PatientRepository>();
 
-            services.AddTransient<HospitalDbContext, HospitalDbContext>();         
+            services.AddSingleton<HospitalDbContext, HospitalDbContext>();         
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

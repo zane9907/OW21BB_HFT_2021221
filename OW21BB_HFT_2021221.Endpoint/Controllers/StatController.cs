@@ -42,22 +42,13 @@ namespace OW21BB_HFT_2021221.Endpoint.Controllers
         public IEnumerable<KeyValuePair<string, int>> DiseasePerDoctor(string disease)
         {
             return docLogic.DiseasePerDoctor(disease);
+        }        
+
+        [HttpGet] //stat/patientsperhospital
+        public IEnumerable<KeyValuePair<string, int>> PatientsPerHospital()
+        {
+            return hospLogic.PatientsPerHospital().ToList();
         }
-
-        //--------------------------------------------------------------------------------
-        //  NOT WORKING
-        //  EXCEIPTION:
-
-        //  System.InvalidOperationException:
-        //  'Cannot use multiple context instances within a single query execution.
-        //  Ensure the query uses a single context instance.'
-
-        //  [HttpGet] //stat/patientsperhospital
-        //  public IEnumerable<KeyValuePair<string, int>> PatientsPerHospital()
-        //  {
-        //    return hospLogic.PatientsPerHospital().ToList();
-        //  }
-        //--------------------------------------------------------------------------------
 
         [HttpGet("{hospitalID}")] //stat/doctorspecializatoncountinspecifichospital/{hospitalID}
         public IEnumerable<KeyValuePair<string, int>> DoctorSpecializatonCountInSpecificHospital(int hospitalID)
