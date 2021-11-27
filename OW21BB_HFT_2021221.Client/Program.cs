@@ -3,6 +3,7 @@ using System;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
+using ConsoleTools;
 //using OW21BB_HFT_2021221.Logic;
 //using OW21BB_HFT_2021221.Data;
 //using OW21BB_HFT_2021221.Repository;
@@ -63,8 +64,39 @@ namespace OW21BB_HFT_2021221.Client
 
             var hospital = rs.GetSingle<Hospital>("hospital/1");
 
-            ;
 
+            var menu = new ConsoleMenu(args, level: 0)
+        .Add("One", () => Yes(rs))
+        .Add("Two", () => rs.GetSingle<Hospital>("hospital/1"))
+        .Add("Exit", () => Environment.Exit(0))
+        .Configure(config =>
+        {
+            config.Selector = "--> ";
+            config.EnableFilter = true;
+            config.Title = "Main menu";
+            config.EnableWriteTitle = true;
+            config.EnableBreadcrumb = true;
+        });
+
+            menu.Show();
+
+
+
+
+        }
+
+        static void Yes(RestService rs)
+        {
+            Console.Clear();
+            var hospitals = rs.Get<Hospital>("hospital");
+            int i = 0;
+            foreach (var item in hospitals)
+            {
+                Console.WriteLine($"[{i++}] - {item.Name}, {item.Location}");
+            }
+
+
+            Console.ReadLine();
         }
     }
 }
