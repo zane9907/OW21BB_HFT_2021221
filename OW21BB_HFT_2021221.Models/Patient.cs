@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace OW21BB_HFT_2021221.Models
@@ -35,9 +36,11 @@ namespace OW21BB_HFT_2021221.Models
         public string Disease { get; set; }
 
         [NotMapped]
+        [JsonIgnore]
         public string Alldata => $"[{PatientID}] -> {Name} - {Age} - {Address}";
 
         [NotMapped]
+        [JsonIgnore]
         public virtual Doctor Doctor { get; set; }
     }
 }

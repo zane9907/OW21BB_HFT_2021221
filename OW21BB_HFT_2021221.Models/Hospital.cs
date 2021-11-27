@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace OW21BB_HFT_2021221.Models
@@ -24,9 +25,11 @@ namespace OW21BB_HFT_2021221.Models
         public string Location { get; set; }
 
         [NotMapped]
+        [JsonIgnore]
         public string AllData => $"[{HospitalID}] -> {Name} - {Location} - Number of Doctors: {Doctors.Count()}";
 
         [NotMapped]
+        [JsonIgnore]
         public virtual ICollection<Doctor> Doctors { get; set; }
 
         public Hospital()

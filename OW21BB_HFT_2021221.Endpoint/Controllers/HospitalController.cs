@@ -35,21 +35,21 @@ namespace OW21BB_HFT_2021221.Endpoint.Controllers
             return hospLogic.GetHospitalById(id);
         }
 
-        // POST: /blog
+        // POST: /hospital
         [HttpPost]
         public void Post([FromBody] Hospital value)
         {
             hospLogic.AddNewHospital(value);
         }
 
-        // PUT: /blog
+        // PUT: /hospital
         [HttpPut]
         public void Put([FromBody] Hospital value)
         {
             hospLogic.UpdateHospital(value);
         }
 
-        // Delete /blog/{id}
+        // Delete /hospital/{id}
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
