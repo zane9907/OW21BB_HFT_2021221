@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
-//using OW21BB_HFT_2021221.Logic;
-//using OW21BB_HFT_2021221.Data;
-//using OW21BB_HFT_2021221.Repository;
+using OW21BB_HFT_2021221.Logic;
+using OW21BB_HFT_2021221.Data;
+using OW21BB_HFT_2021221.Repository;
 
 namespace OW21BB_HFT_2021221.Client
 {
@@ -11,17 +11,17 @@ namespace OW21BB_HFT_2021221.Client
     {
         static void Main(string[] args)
         {
-            //HospitalDbContext hpctx = new HospitalDbContext();
-            
-
-            //DoctorRepository doctorRepository = new DoctorRepository(hpctx);
-            //PatientRepository patientRepository = new PatientRepository(hpctx);
-            //HospitalRepository hospitalRepository = new HospitalRepository(hpctx);
+            HospitalDbContext hpctx = new HospitalDbContext();
 
 
-            //DoctorLogic doctorLogic = new DoctorLogic(doctorRepository, patientRepository);
-            //HospitalLogic hospitalLogic = new HospitalLogic(hospitalRepository, doctorRepository, patientRepository);
-            //PatientLogic patientLogic = new PatientLogic(patientRepository);
+            DoctorRepository doctorRepository = new DoctorRepository(hpctx);
+            PatientRepository patientRepository = new PatientRepository(hpctx);
+            HospitalRepository hospitalRepository = new HospitalRepository(hpctx);
+
+
+            DoctorLogic doctorLogic = new DoctorLogic(doctorRepository, patientRepository);
+            HospitalLogic hospitalLogic = new HospitalLogic(hospitalRepository, doctorRepository, patientRepository);
+            PatientLogic patientLogic = new PatientLogic(patientRepository);
 
 
 
@@ -41,17 +41,17 @@ namespace OW21BB_HFT_2021221.Client
             //}
 
 
-            
+
 
             //var asd1 = doctorLogic.AVGAgeOfDoctorsPatients();
             //var asd2 = hospitalLogic.DoctorSpecializatonCount();
             //var asd3 = doctorLogic.DiseasePerDoctor("Influenza");
-            //var asd4 = hospitalLogic.PatientsPerHospital();
+            var asd4 = hospitalLogic.PatientsPerHospital();
             //var asd5 = hospitalLogic.DoctorSpecializatonCountInSpecificHospital(1);
 
             //var asd6 = patientLogic.IsDiseasePresent("PTSD");
-            
-            //;
+
+            ;
         }
     }
 }
