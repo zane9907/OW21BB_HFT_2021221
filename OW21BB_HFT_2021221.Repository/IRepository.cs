@@ -12,6 +12,6 @@ namespace OW21BB_HFT_2021221.Repository
         T Get(int id);
         IQueryable<T> GetAll();
         void Update(T t);
-        void Delete(T t);
+        void Delete(int id);
     }
 }

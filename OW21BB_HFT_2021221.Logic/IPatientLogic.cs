@@ -13,7 +13,7 @@ namespace OW21BB_HFT_2021221.Logic
         IEnumerable<Patient> GetAllPatients();
         void AddNewPatient(Patient patient);
         void UpdatePatient(Patient patient);
-        void DeletePatient(Patient patient);
+        void DeletePatient(int id);
 
         bool IsDiseasePresent(string disease);
 

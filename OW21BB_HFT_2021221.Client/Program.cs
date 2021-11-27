@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
-using OW21BB_HFT_2021221.Logic;
-using OW21BB_HFT_2021221.Data;
-using OW21BB_HFT_2021221.Repository;
+//using OW21BB_HFT_2021221.Logic;
+//using OW21BB_HFT_2021221.Data;
+//using OW21BB_HFT_2021221.Repository;
 
 namespace OW21BB_HFT_2021221.Client
 {

@@ -26,9 +26,9 @@ namespace OW21BB_HFT_2021221.Logic
             hospitalRepo.Create(hospital);
         }
 
-        public void DeleteHospital(Hospital t)
+        public void DeleteHospital(int id)
         {
-            hospitalRepo.Delete(t);
+            hospitalRepo.Delete(id);
         }
 
         public IEnumerable<KeyValuePair<string, int>> DoctorSpecializatonCount()

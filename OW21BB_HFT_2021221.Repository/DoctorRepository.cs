@@ -20,9 +20,9 @@ namespace OW21BB_HFT_2021221.Repository
             hpctx.SaveChanges();
         }
 
-        public override void Delete(Doctor t)
+        public override void Delete(int id)
         {
-            var doctorDelete = Get(t.DoctorID);
+            var doctorDelete = Get(id);
             hpctx.Doctors.Remove(doctorDelete);
             hpctx.SaveChanges();
         }

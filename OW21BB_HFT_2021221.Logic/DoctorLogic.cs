@@ -35,9 +35,9 @@ namespace OW21BB_HFT_2021221.Logic
                     )).ToList();
         }
 
-        public void DeleteDoctor(Doctor doctor)
+        public void DeleteDoctor(int id)
         {
-            doctorRepository.Delete(doctor);
+            doctorRepository.Delete(id);
         }
 
         public IEnumerable<Doctor> GetAllDoctors()

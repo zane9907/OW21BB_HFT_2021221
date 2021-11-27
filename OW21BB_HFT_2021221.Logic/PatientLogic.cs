@@ -23,9 +23,9 @@ namespace OW21BB_HFT_2021221.Logic
             patientRepository.Create(patient);
         }
 
-        public void DeletePatient(Patient patient)
+        public void DeletePatient(int id)
         {
-            patientRepository.Delete(patient);
+            patientRepository.Delete(id);
         }
 
         public IEnumerable<Patient> GetAllPatients()

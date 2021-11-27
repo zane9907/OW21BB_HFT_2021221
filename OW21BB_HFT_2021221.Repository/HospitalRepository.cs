@@ -21,9 +21,9 @@ namespace OW21BB_HFT_2021221.Repository
             hpctx.SaveChanges();
         }
 
-        public override void Delete(Hospital t)
+        public override void Delete(int id)
         {
-            var hospitalDelete = Get(t.HospitalID);
+            var hospitalDelete = Get(id);
             hpctx.Hospitals.Remove(hospitalDelete);
             hpctx.SaveChanges();
         }

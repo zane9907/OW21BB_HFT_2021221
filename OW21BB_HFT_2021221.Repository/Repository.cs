@@ -19,7 +19,7 @@ namespace OW21BB_HFT_2021221.Repository
         public abstract void Create(T t);
 
 
-        public abstract void Delete(T t);
+        public abstract void Delete(int id);
 
 
         public abstract T Get(int id);
