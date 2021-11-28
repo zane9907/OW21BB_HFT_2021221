@@ -69,7 +69,11 @@ namespace OW21BB_HFT_2021221.Logic
 
         public Hospital GetHospitalById(int id)
         {
-            if (id <= hospitalRepo.GetAll().Count())
+            //TODO ExceoptionHandling -> asd gives back count of elements, not the id of the elements
+
+
+            int asd = hospitalRepo.GetAll().Count();
+            if (id <= asd)
             {
                 return hospitalRepo.Get(id);
             }
