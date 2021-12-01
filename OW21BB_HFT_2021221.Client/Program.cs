@@ -60,43 +60,112 @@ namespace OW21BB_HFT_2021221.Client
 
             RestService rs = new RestService("http://localhost:41147");
 
-            var hospitals = rs.Get<Hospital>("hospital");
+            var subGetAll = new ConsoleMenu(args, level: 1)
+        .Add("Get all hospitals", () => GetAllInstance(rs, "hospital"))
+        .Add("Get all doctors", () => GetAllInstance(rs, "doctor"))
+        .Add("Get all patients", () => GetAllInstance(rs, "patient"))
+        .Add("Back", ConsoleMenu.Close)
+        .Configure(config =>
+        {
+            config.Selector = "--> ";
+            config.EnableFilter = true;
+            config.Title = "Get all data";
+            config.EnableBreadcrumb = true;
+            config.WriteBreadcrumbAction = titles => Console.WriteLine(string.Join(" / ", titles));
+        });
 
-            var hospital = rs.GetSingle<Hospital>("hospital/1");
 
+            var subGetOne = new ConsoleMenu(args, level: 1)
+        .Add("Get one hospital", () => GetOneInstance(rs, "hospital"))
+        .Add("Get one doctor", () => GetOneInstance(rs, "doctor"))
+        .Add("Get one patient", () => GetOneInstance(rs, "patient"))
+        .Add("Back", ConsoleMenu.Close)
+        .Configure(config =>
+        {
+            config.Selector = "--> ";
+            config.EnableFilter = true;
+            config.Title = "Get all data";
+            config.EnableBreadcrumb = true;
+            config.WriteBreadcrumbAction = titles => Console.WriteLine(string.Join(" / ", titles));
+        });
 
             var menu = new ConsoleMenu(args, level: 0)
-        .Add("One", () => Yes(rs))
-        .Add("Two", () => rs.GetSingle<Hospital>("hospital/1"))
+        .Add("Get all data", subGetAll.Show)
+        .Add("Get one instance", subGetOne.Show)
         .Add("Exit", () => Environment.Exit(0))
         .Configure(config =>
         {
             config.Selector = "--> ";
             config.EnableFilter = true;
-            config.Title = "Main menu";
+            config.Title = "HOSPITAL DATABASE\n------------------";
             config.EnableWriteTitle = true;
             config.EnableBreadcrumb = true;
         });
 
+
+
             menu.Show();
-
-
-
-
         }
-
-        static void Yes(RestService rs)
+        static void GetOneInstance(RestService rs, string model)
         {
             Console.Clear();
-            var hospitals = rs.Get<Hospital>("hospital");
-            int i = 0;
-            foreach (var item in hospitals)
+
+            if (model == "hospital")
             {
-                Console.WriteLine($"[{i++}] - {item.Name}, {item.Location}");
+                rs.Get<Hospital>($"{model}").ForEach(x => Console.WriteLine($"[{x.HospitalID}] - {x.Name}"));
+
+                Console.Write("Select an id: "); Console.WriteLine();
+                int id = int.Parse(Console.ReadLine());
+                Console.Clear();
+
+                var hos = rs.GetSingle<Hospital>($"{model}/{id}");
+                Console.WriteLine($"{hos.AllData} - Doctors: {hos.DoctorCount}");
+
+            }
+            else if (model == "doctor")
+            {
+                rs.Get<Doctor>($"{model}").ForEach(x => Console.WriteLine($"[{x.DoctorID}] - {x.Name}"));
+
+                Console.Write("Select an id: "); Console.WriteLine();
+                int id = int.Parse(Console.ReadLine());
+                Console.Clear();
+
+                var doc = rs.GetSingle<Doctor>($"{model}/{id}");
+                Console.WriteLine($"{doc.AllData} - Patients: {doc.PatientCount}");
+            }
+            else
+            {
+                rs.Get<Patient>($"{model}").ForEach(x => Console.WriteLine($"[{x.PatientID}] - {x.Name}"));
+
+                Console.Write("Select an id: "); Console.WriteLine();
+                int id = int.Parse(Console.ReadLine());
+                Console.Clear();
+
+                var pat = rs.GetSingle<Patient>($"{model}/{id}");
+                Console.WriteLine($"{pat.AllData}");
             }
 
-
             Console.ReadLine();
+        }
+
+        static void GetAllInstance(RestService rs, string model)
+        {
+
+            Console.Clear();
+            if (model == "hospital")
+            {
+                rs.Get<Hospital>($"{model}").ForEach(x => Console.WriteLine(x.AllData));
+            }
+            else if (model == "doctor")
+            {
+                rs.Get<Doctor>($"{model}").ForEach(x => Console.WriteLine(x.AllData));
+            }
+            else
+            {
+                rs.Get<Patient>($"{model}").ForEach(x => Console.WriteLine(x.AllData));
+            }
+
+            Console.ReadLine();    
         }
     }
 }

@@ -24,7 +24,7 @@ namespace OW21BB_HFT_2021221.Models
 
         public string Location { get; set; }
 
-        [JsonInclude]        
+           
         public int DoctorCount
         {
             get
@@ -32,8 +32,9 @@ namespace OW21BB_HFT_2021221.Models
                 return this.Doctors.Count();
             }
         }
-        [JsonIgnore]
-        public string AllData => $"[{HospitalID}] -> {Name} - {Location} - Number of Doctors: {this.DoctorCount}";
+
+        [NotMapped]
+        public string AllData => $"[{HospitalID}] -> {Name} - {Location}";
 
         [NotMapped]
         [JsonIgnore]

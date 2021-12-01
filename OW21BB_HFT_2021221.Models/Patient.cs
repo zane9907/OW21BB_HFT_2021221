@@ -35,9 +35,9 @@ namespace OW21BB_HFT_2021221.Models
 
         public string Disease { get; set; }
 
+
         [NotMapped]
-        [JsonIgnore]
-        public string Alldata => $"[{PatientID}] -> {Name} - {Age} - {Address}";
+        public string AllData => $"[{PatientID}] -> {Name} - {Age} - {Address}";
 
         [NotMapped]
         [JsonIgnore]

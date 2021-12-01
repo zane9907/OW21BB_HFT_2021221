@@ -28,8 +28,16 @@ namespace OW21BB_HFT_2021221.Models
 
         public string Specialization { get; set; }
 
+        public int PatientCount
+        {
+            get
+            {
+                return this.Patients.Count();
+            }
+        }
+
         [NotMapped]
-        public string AllData => $"[{DoctorID}] -> {Name} - {Specialization} - Number of Patients: {Patients.Count()}";
+        public string AllData => $"[{DoctorID}] -> {Name} - {Specialization}";
 
         [NotMapped]
         [JsonIgnore]
