@@ -63,16 +63,16 @@ namespace OW21BB_HFT_2021221.Endpoint.Controllers
         }
 
         [HttpGet] //stat/alldiseasesperdoctor
-        public KeyValuePair<List<string>, IEnumerable<IEnumerable<string>>> AllDiseasesPerDoctor()
+        public IEnumerable<IEnumerable<string>> AllDiseasesPerDoctor()
         {
-            var asd0 = docLogic.AllDiseasesPerDoctor();
-            var doctorNames = docLogic.GetAllDoctors().Select(x => x.Name).ToList();
+            var alldisease = docLogic.AllDiseasesPerDoctor();
+            //var doctorNames = docLogic.GetAllDoctors().Select(x => x.Name).ToList();
 
-            KeyValuePair<List<string>, IEnumerable<IEnumerable<string>>> diseasesPerDoctor =
-                new KeyValuePair<List<string>, IEnumerable<IEnumerable<string>>>(doctorNames, asd0);
+            //KeyValuePair<List<string>, IEnumerable<IEnumerable<string>>> diseasesPerDoctor =
+            //    new KeyValuePair<List<string>, IEnumerable<IEnumerable<string>>>(doctorNames, asd0);
 
 
-            return diseasesPerDoctor;
+            return alldisease;
         }
     }
 }

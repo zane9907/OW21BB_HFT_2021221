@@ -22,7 +22,7 @@ namespace OW21BB_HFT_2021221.Models
         //public int SocialSecurityNumber { get; set; }
 
         [ForeignKey(nameof(Doctor))]
-        public int DoctorID { get; set; }
+        public int? DoctorID { get; set; }
 
         [Required]
         [MaxLength(30)]

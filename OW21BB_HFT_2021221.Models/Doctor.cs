@@ -17,7 +17,7 @@ namespace OW21BB_HFT_2021221.Models
         public int DoctorID { get; set; }
 
         [ForeignKey(nameof(Hospital))]
-        public int HospitalID { get; set; }
+        public int? HospitalID { get; set; }
 
         //[ForeignKey(nameof(Patient))]        
         //public int PatientID { get; set; }
