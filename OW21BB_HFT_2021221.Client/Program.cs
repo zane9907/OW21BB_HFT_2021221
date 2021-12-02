@@ -353,7 +353,7 @@ namespace OW21BB_HFT_2021221.Client
 
                 Console.Write("Hospital Location: ");
                 string location = Console.ReadLine(); Console.WriteLine();
-                Console.Clear();
+                
 
 
                 rs.Post<Hospital>(new Hospital() { Name = name, Location = location }, model);
@@ -366,10 +366,15 @@ namespace OW21BB_HFT_2021221.Client
 
                 Console.Write("Doctor Specialization: ");
                 string spec = Console.ReadLine(); Console.WriteLine();
-                Console.Clear();
+                
 
+                rs.Get<Hospital>($"{model}").ForEach(x => Console.WriteLine($"[{x.HospitalID}] - {x.Name}"));
+                Console.WriteLine("Which hospital do you want to add the new doctor? (select id)");
+                int id = int.Parse(Console.ReadLine());
 
-                rs.Post<Doctor>(new Doctor() { Name = name, Specialization = spec }, model);
+                
+
+                rs.Post<Doctor>(new Doctor() { Name = name,HospitalID = id, Specialization = spec }, model);
             }
             else
             {
@@ -385,10 +390,15 @@ namespace OW21BB_HFT_2021221.Client
 
                 Console.Write("Patient Disease: ");
                 string disease = Console.ReadLine(); Console.WriteLine();
-                Console.Clear();
+
+                rs.Get<Doctor>($"{model}").ForEach(x => Console.WriteLine($"[{x.DoctorID}] - {x.Name}"));
+                Console.WriteLine("Which doctor do you want to add the new patient? (select id)");
+                int id = int.Parse(Console.ReadLine());
+
+                
 
 
-                rs.Post<Patient>(new Patient() { Name = name, Age = int.Parse(age), Address = address, Disease = disease }, model);
+                rs.Post<Patient>(new Patient() { Name = name, DoctorID = id, Age = int.Parse(age), Address = address, Disease = disease }, model);
             }
 
             Console.Clear();
