@@ -43,7 +43,7 @@ namespace OW21BB_HFT_2021221.Logic
 
         public IEnumerable<KeyValuePair<string, int>> DoctorSpecializatonCountInSpecificHospital(int hospitalID)
         {
-            var asd = (from x in doctorRepository.GetAll()
+            var specCount = (from x in doctorRepository.GetAll()
                        where x.HospitalID.Equals(hospitalID)
                        group x by x.Specialization into g
                        select new KeyValuePair<string, int>
@@ -51,7 +51,7 @@ namespace OW21BB_HFT_2021221.Logic
                            g.Key, g.Count()
                        )).ToList();
 
-            return asd;
+            return specCount;
         }
 
         public IEnumerable<Hospital> GetAllHospitals()
@@ -68,12 +68,11 @@ namespace OW21BB_HFT_2021221.Logic
         }
 
         public Hospital GetHospitalById(int id)
-        {
-            //TODO ExceoptionHandling -> asd gives back count of elements, not the id of the elements
+        {        
 
 
-            int asd = hospitalRepo.GetAll().Count();
-            if (id <= asd)
+            int hospitalCount = hospitalRepo.GetAll().Count();
+            if (id <= hospitalCount)
             {
                 return hospitalRepo.Get(id);
             }
