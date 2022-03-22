@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 using OW21BB_HFT_2021221.Data;
 using OW21BB_HFT_2021221.Logic;
 using OW21BB_HFT_2021221.Models;
@@ -19,6 +20,11 @@ namespace OW21BB_HFT_2021221.Endpoint
     {
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "MovieDbApp.Endpoint", Version = "v1" });
+            });
+
             services.AddControllers();
 
             services.AddTransient<IHospitalLogic, HospitalLogic>();
@@ -41,6 +47,9 @@ namespace OW21BB_HFT_2021221.Endpoint
             }
 
             app.UseRouting();
+            app.UseSwagger();
+            app.UseSwaggerUI(c => 
+            c.SwaggerEndpoint("/ swagger / v1 / swagger.json", "MovieDbApp.Endpoint v1"));
 
             app.UseEndpoints(endpoints =>
             {
