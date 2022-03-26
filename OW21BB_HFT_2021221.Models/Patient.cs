@@ -24,9 +24,11 @@ namespace OW21BB_HFT_2021221.Models
         [ForeignKey(nameof(Doctor))]
         public int? DoctorID { get; set; }
 
+
         [Required]
         [MaxLength(30)]
         public string Name { get; set; }
+
 
         [Required]
         public int Age { get; set; }
@@ -42,5 +44,19 @@ namespace OW21BB_HFT_2021221.Models
         [NotMapped]
         [JsonIgnore]
         public virtual Doctor Doctor { get; set; }
+
+        public Patient GetCopy(Patient value)
+        {
+            return new Patient()
+            {
+                Name = value.Name,
+                Age = value.Age,
+                Address = value.Address,
+                Disease = value.Disease,
+                Doctor = value.Doctor,
+                PatientID = value.PatientID,
+                DoctorID = value.DoctorID   
+            };
+        }
     }
 }

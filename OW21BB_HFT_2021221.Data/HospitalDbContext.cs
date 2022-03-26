@@ -23,7 +23,8 @@ namespace OW21BB_HFT_2021221.Data
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseLazyLoadingProxies().UseSqlServer(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\HospitalDatabase.mdf;Integrated Security=True");
+                optionsBuilder.UseLazyLoadingProxies()
+                    .UseSqlServer(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\HospitalDatabase.mdf;Integrated Security=True");
             }
         }
 
