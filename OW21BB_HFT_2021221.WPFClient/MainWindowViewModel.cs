@@ -101,8 +101,8 @@ namespace OW21BB_HFT_2021221.WPFClient
                 Hospitals = new RestCollection<Hospital>("http://localhost:41147/", "hospital", "hub");
                 Patients = new RestCollection<Patient>("http://localhost:41147/", "patient", "hub");
 
-                this.ShowMenu = true;
-                this.ShowHospitals = false;
+                this.showMenu = true;
+                this.showHospitals = false;
 
                 ManageHospitalsCommand = new RelayCommand(() =>
                 {

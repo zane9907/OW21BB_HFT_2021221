@@ -45,8 +45,23 @@
             </StackPanel>
         </Grid>
 
-        <Grid Visibility="{Binding ShowHospitals, Converter={StaticResource visibilityConverter}}">            
-            <ListBox Background="Transparent" ItemsSource="{Binding Hospitals}">
+        <Grid Visibility="{Binding ShowHospitals, Converter={StaticResource visibilityConverter}}">
+            <!--Visibility="{Binding ShowHospitals, Converter={StaticResource visibilityConverter}}"-->
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="9*"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="9*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0" Grid.Row="0" Background="LightSlateGray" Foreground="White" 
+                    Content="&#57366;" FontSize="70" FontWeight="Bold" FontFamily="Segoe UI Symbol"/>
+            <!--&#57557; &#57366;-->
+            <ListBox FontSize="100" Grid.Row="1" Grid.ColumnSpan="2" Background="Transparent" ItemsSource="{Binding Hospitals}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Label Content="{Binding AllData}"/>
