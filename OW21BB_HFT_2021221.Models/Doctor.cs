@@ -45,7 +45,6 @@ namespace OW21BB_HFT_2021221.Models
 
         [NotMapped]
         [JsonIgnore]
-
         public virtual ICollection<Patient> Patients { get; set; }
 
         public Doctor()

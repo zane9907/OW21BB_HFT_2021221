@@ -4,11 +4,14 @@ using OW21BB_HFT_2021221.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace OW21BB_HFT_2021221.WPFClient
 {
@@ -17,23 +20,31 @@ namespace OW21BB_HFT_2021221.WPFClient
         public RestCollection<Hospital> Hospitals { get; set; }
         public RestCollection<Patient> Patients { get; set; }
 
-        private Patient selectedPatient;
+        private SolidColorBrush backGroundColor;
 
-        public Patient SelectedPatient
+        public SolidColorBrush BackGroundColor
         {
-            get { return selectedPatient; }
-            set
-            {
-
-                if (value != null)
-                {
-                    selectedPatient = selectedPatient.GetCopy(value);
-
-                    OnPropertyChanged();
-                    (DeletePatientCommand as RelayCommand).NotifyCanExecuteChanged(); 
-                }
-            }
+            get { return new SolidColorBrush(Color.FromRgb(153, 217, 234)); }
         }
+
+
+        //private Patient selectedPatient;
+
+        //public Patient SelectedPatient
+        //{
+        //    get { return selectedPatient; }
+        //    set
+        //    {
+
+        //        if (value != null)
+        //        {
+        //            selectedPatient = selectedPatient.GetCopy(value);
+
+        //            OnPropertyChanged();
+        //            (DeletePatientCommand as RelayCommand).NotifyCanExecuteChanged();
+        //        }
+        //    }
+        //}
 
 
         public static bool IsInDesignMode
@@ -45,45 +56,103 @@ namespace OW21BB_HFT_2021221.WPFClient
             }
         }
 
-        public ICommand CreatePatientCommand { get; set; }
-        public ICommand DeletePatientCommand { get; set; }
-        public ICommand UpdatePatientCommand { get; set; }
+        public ICommand ManageHospitalsCommand { get; set; }
+        public ICommand ManageDoctorsCommand { get; set; }
+        public ICommand ManagePatientsCommand { get; set; }
+        public ICommand ExitCommand { get; set; }
+
+
+        private bool showMenu;
+
+        public bool ShowMenu
+        {
+            get { return showMenu; }
+            set
+            {
+                showMenu = value;
+                OnPropertyChanged("ShowMenu");
+                (ManageHospitalsCommand as RelayCommand).NotifyCanExecuteChanged();
+            }
+        }
+
+        private bool showHospitals;
+
+        public bool ShowHospitals
+        {
+            get { return showHospitals; }
+            set
+            {
+                showHospitals = value;
+                OnPropertyChanged("ShowHospitals");
+                (ManageHospitalsCommand as RelayCommand).NotifyCanExecuteChanged();
+            }
+        }
+
+
+
+        //public ICommand CreatePatientCommand { get; set; }
+        //public ICommand DeletePatientCommand { get; set; }
+        //public ICommand UpdatePatientCommand { get; set; }
 
         public MainWindowViewModel()
         {
             if (!IsInDesignMode)
             {
-                //Hospitals = new RestCollection<Hospital>("http://localhost:41147/", "hospital");
-                Patients = new RestCollection<Patient>("http://localhost:41147/", "patient","hub");
+                Hospitals = new RestCollection<Hospital>("http://localhost:41147/", "hospital", "hub");
+                Patients = new RestCollection<Patient>("http://localhost:41147/", "patient", "hub");
 
-                CreatePatientCommand = new RelayCommand(() =>
+                this.ShowMenu = true;
+                this.ShowHospitals = false;
+
+                ManageHospitalsCommand = new RelayCommand(() =>
                 {
-                    Patients.Add(new Patient()
-                    {
-                        Name = SelectedPatient.Name
-                    });
+                    this.ShowHospitals = true;
+                    this.ShowMenu = false;
+
                 });
 
-                DeletePatientCommand = new RelayCommand(() =>
-                {                    
-                    Patients.Delete(SelectedPatient.PatientID);
-                },
-                () =>
+                ManageDoctorsCommand = new RelayCommand(() =>
                 {
-                    return SelectedPatient.Name != null;
-                }
-                );
 
-                UpdatePatientCommand = new RelayCommand(() =>
-                {
-                    Patients.Update(SelectedPatient); 
-                },
-                () =>
-                {
-                    return SelectedPatient != null;
                 });
 
-                selectedPatient = new Patient();
+                ManagePatientsCommand = new RelayCommand(() =>
+                {
+
+                });
+
+                ExitCommand = new RelayCommand(() => Environment.Exit(0));
+
+                #region patientCommands
+                //CreatePatientCommand = new RelayCommand(() =>
+                //{
+                //    Patients.Add(new Patient()
+                //    {
+                //        Name = SelectedPatient.Name
+                //    });
+                //});
+
+                //DeletePatientCommand = new RelayCommand(() =>
+                //{
+                //    Patients.Delete(SelectedPatient.PatientID);
+                //},
+                //() =>
+                //{
+                //    return SelectedPatient.Name != null;
+                //}
+                //);
+
+                //UpdatePatientCommand = new RelayCommand(() =>
+                //{
+                //    Patients.Update(SelectedPatient);
+                //},
+                //() =>
+                //{
+                //    return SelectedPatient != null;
+                //});
+
+                //selectedPatient = new Patient(); 
+                #endregion
             }
         }
     }

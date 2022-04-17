@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.IO;
 
 namespace OW21BB_HFT_2021221.WPFClient
 {
@@ -21,8 +22,10 @@ namespace OW21BB_HFT_2021221.WPFClient
     public partial class MainWindow : Window
     {
         public MainWindow()
-        {
+        {            
             InitializeComponent();
+
+            
         }
     }
 }

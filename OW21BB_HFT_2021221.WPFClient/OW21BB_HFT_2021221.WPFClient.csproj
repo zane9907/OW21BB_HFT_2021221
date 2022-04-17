@@ -5,6 +5,7 @@
     <TargetFramework>net5.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,5 +17,15 @@
   <ItemGroup>
     <ProjectReference Include="..\OW21BB_HFT_2021221.Models\OW21BB_HFT_2021221.Models.csproj" />
   </ItemGroup>
-  
+
+  <ItemGroup>
+    <None Remove="Images\logo.bmp" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Images\logo.bmp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

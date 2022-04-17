@@ -4,12 +4,63 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OW21BB_HFT_2021221.WPFClient"
+        xmlns:services="clr-namespace:OW21BB_HFT_2021221.WPFClient.Services"
         mc:Ignorable="d"
-        Title="Hospital Editor" Height="450" Width="800">
+        Title="Healthcare Database" Height="1080" Width="1920" WindowState="Maximized">
     <Window.DataContext>
         <local:MainWindowViewModel/>
     </Window.DataContext>
-    <Grid>
+    <Window.Resources>
+        <services:BoolToVisibilityConverter x:Key="visibilityConverter"/>
+    </Window.Resources>
+
+    <Grid x:Name="grid" Background="{Binding BackGroundColor}">
+        <Grid Visibility="{Binding ShowMenu, Converter={StaticResource visibilityConverter}}">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+
+            <Image Source="Images\logo.bmp" Grid.Column="0" Width="600" Height="600" />
+
+            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                <Button Content="Manage Hospitals" Command="{Binding ManageHospitalsCommand}"
+                    Width="600" Height="100" FontFamily="Courier New" FontSize="48" FontWeight="Bold"
+                    Margin="0 30"/>
+
+                <Button Content="Manage Doctors" Command="{Binding ManageDoctorsCommand}"
+                    Width="600" Height="100" FontFamily="Courier New" FontSize="48" FontWeight="Bold"
+                    Margin="0 30"/>
+
+                <Button Content="Manage Patients" Command="{Binding ManagePatientsCommand}"
+                    Width="600" Height="100" FontFamily="Courier New" FontSize="48" FontWeight="Bold"
+                    Margin="0 30"/>
+
+                <Button Content="Exit" Command="{Binding ExitCommand}"
+                    Width="600" Height="100" FontFamily="Courier New" FontSize="48" FontWeight="Bold"
+                    Margin="0 30"/>
+
+            </StackPanel>
+        </Grid>
+
+        <Grid Visibility="{Binding ShowHospitals, Converter={StaticResource visibilityConverter}}">            
+            <ListBox Background="Transparent" ItemsSource="{Binding Hospitals}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Label Content="{Binding AllData}"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+
+    </Grid>
+
+
+
+
+    <!--<Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
@@ -29,5 +80,5 @@
             <Button Content="Delete Patient" Command="{Binding DeletePatientCommand}" Margin="10" Padding="10"/>
             <Button Content="Update Patient" Command="{Binding UpdatePatientCommand}" Margin="10" Padding="10"/>
         </StackPanel>
-    </Grid>
+    </Grid>-->
 </Window>
