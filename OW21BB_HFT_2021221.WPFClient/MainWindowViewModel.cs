@@ -18,6 +18,7 @@ namespace OW21BB_HFT_2021221.WPFClient
     public class MainWindowViewModel : ObservableRecipient
     {
         public RestCollection<Hospital> Hospitals { get; set; }
+        public RestCollection<Doctor> Doctors { get; set; }
         public RestCollection<Patient> Patients { get; set; }
 
         private SolidColorBrush backGroundColor;
@@ -56,10 +57,30 @@ namespace OW21BB_HFT_2021221.WPFClient
             }
         }
 
+        #region Commands
+
+
+
         public ICommand ManageHospitalsCommand { get; set; }
         public ICommand ManageDoctorsCommand { get; set; }
         public ICommand ManagePatientsCommand { get; set; }
         public ICommand ExitCommand { get; set; }
+
+        public ICommand BackCommand { get; set; }
+
+
+
+        //public ICommand CreatePatientCommand { get; set; }
+        //public ICommand DeletePatientCommand { get; set; }
+        //public ICommand UpdatePatientCommand { get; set; } 
+
+
+
+        #endregion
+
+
+        #region Properties
+
 
 
         private bool showMenu;
@@ -69,9 +90,7 @@ namespace OW21BB_HFT_2021221.WPFClient
             get { return showMenu; }
             set
             {
-                showMenu = value;
-                OnPropertyChanged("ShowMenu");
-                (ManageHospitalsCommand as RelayCommand).NotifyCanExecuteChanged();
+                SetProperty(ref showMenu, value);
             }
         }
 
@@ -82,46 +101,59 @@ namespace OW21BB_HFT_2021221.WPFClient
             get { return showHospitals; }
             set
             {
-                showHospitals = value;
-                OnPropertyChanged("ShowHospitals");
+                SetProperty(ref showHospitals, value);
                 (ManageHospitalsCommand as RelayCommand).NotifyCanExecuteChanged();
             }
         }
 
+        private bool showDoctors;
+
+        public bool ShowDoctors
+        {
+            get { return showDoctors; }
+            set
+            {
+                SetProperty(ref showDoctors, value);
+                (ManageDoctorsCommand as RelayCommand).NotifyCanExecuteChanged();
+            }
+        }
+
+        private bool showPatients;
+
+        public bool ShowPatients
+        {
+            get { return showPatients; }
+            set
+            {
+                SetProperty(ref showPatients, value);
+                (ManagePatientsCommand as RelayCommand).NotifyCanExecuteChanged();
+            }
+        } 
 
 
-        //public ICommand CreatePatientCommand { get; set; }
-        //public ICommand DeletePatientCommand { get; set; }
-        //public ICommand UpdatePatientCommand { get; set; }
+
+
+        #endregion
+
+
+
+
 
         public MainWindowViewModel()
         {
             if (!IsInDesignMode)
             {
                 Hospitals = new RestCollection<Hospital>("http://localhost:41147/", "hospital", "hub");
+                Doctors = new RestCollection<Doctor>("http://localhost:41147/", "doctor", "hub");
                 Patients = new RestCollection<Patient>("http://localhost:41147/", "patient", "hub");
 
                 this.showMenu = true;
                 this.showHospitals = false;
+                this.showDoctors = false;
+                this.showPatients = false;
 
-                ManageHospitalsCommand = new RelayCommand(() =>
-                {
-                    this.ShowHospitals = true;
-                    this.ShowMenu = false;
-
-                });
-
-                ManageDoctorsCommand = new RelayCommand(() =>
-                {
-
-                });
-
-                ManagePatientsCommand = new RelayCommand(() =>
-                {
-
-                });
-
-                ExitCommand = new RelayCommand(() => Environment.Exit(0));
+                SetupCommands();
+                
 
                 #region patientCommands
                 //CreatePatientCommand = new RelayCommand(() =>
@@ -154,6 +186,44 @@ namespace OW21BB_HFT_2021221.WPFClient
                 //selectedPatient = new Patient(); 
                 #endregion
             }
+        }
+
+        private void SetupCommands()
+        {
+            ManageHospitalsCommand = new RelayCommand(() =>
+            {
+                this.ShowHospitals = true;
+                this.ShowDoctors = false;
+                this.ShowPatients = false;
+                this.ShowMenu = false;
+
+            });
+
+            ManageDoctorsCommand = new RelayCommand(() =>
+            {
+                this.ShowHospitals = false;
+                this.ShowDoctors = true;
+                this.ShowPatients = false;
+                this.ShowMenu = false;
+            });
+
+            ManagePatientsCommand = new RelayCommand(() =>
+            {
+                this.ShowHospitals = false;
+                this.ShowDoctors = false;
+                this.ShowPatients = true;
+                this.ShowMenu = false;
+            });
+
+            ExitCommand = new RelayCommand(() => Environment.Exit(0));
+
+            BackCommand = new RelayCommand(() =>
+            {
+                this.ShowHospitals = false;
+                this.ShowDoctors = false;
+                this.ShowPatients = false;
+                this.ShowMenu = true;
+            });
         }
     }
 }
