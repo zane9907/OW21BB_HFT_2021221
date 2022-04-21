@@ -45,7 +45,231 @@
             </StackPanel>
         </Grid>
 
-        <Grid x:Name="HositalWindow" Visibility="{Binding ShowHospitals, Converter={StaticResource visibilityConverter}}">
+        <Grid x:Name="PatientWindow" Visibility="{Binding ShowPatients, Converter={StaticResource visibilityConverter}}">
+            <!--Visibility="{Binding ShowHospitals, Converter={StaticResource visibilityConverter}}"-->
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="9*"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="15*"/>
+                <ColumnDefinition Width="9*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Orientation="Horizontal" Grid.Column="1" Background="Gray"  Grid.ColumnSpan="2" >
+                <Button Content="ADD" Background="White" BorderBrush="Black" BorderThickness="5"
+                        FontFamily="Courier New" FontWeight="DemiBold" FontSize="60" Padding="30 0" Margin="10"
+                        Command="{Binding CreatePatientCommand}">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="30"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+
+                <Button Content="UPDATE" Background="White" BorderBrush="Black" BorderThickness="5"
+                        FontFamily="Courier New" FontWeight="DemiBold" FontSize="60" Padding="20 0" Margin="10"
+                        Command="{Binding UpdatePatientCommand}">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="30"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+
+                <Button Content="DELETE" Background="White" BorderBrush="Black" BorderThickness="5"
+                        FontFamily="Courier New" FontWeight="DemiBold" FontSize="60" Padding="20 0" Margin="10"
+                        Command="{Binding DeletePatientCommand}">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="30"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+
+                <Button Content="SAVE AS TXT" Background="White" BorderBrush="Black" BorderThickness="5"
+                        FontFamily="Courier New" FontWeight="DemiBold" FontSize="60" Padding="20 0" Margin="10"
+                        Command="">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="30"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </StackPanel>
+
+
+            <Button Command="{Binding BackCommand}" Grid.Column="0" Grid.Row="0" Background="LightSlateGray" Foreground="White" 
+                    Content="&#57366;" FontSize="70" FontWeight="Bold" FontFamily="Segoe UI Symbol"/>
+            <!--&#57557; &#57366;-->
+
+
+            <ListBox  HorizontalContentAlignment="Stretch" SelectedItem="{Binding SelectedPatient}" 
+                     FontSize="40" Grid.ColumnSpan="2" Grid.Row="1" Background="Transparent"
+                     ItemsSource="{Binding Patients}" >
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border Margin="0 10" Background="Teal" CornerRadius="15" BorderThickness="3" BorderBrush="Black">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="1*"/>
+                                    <RowDefinition Height="1*"/>
+                                    <RowDefinition Height="1*"/>
+                                    <RowDefinition Height="1*"/>
+                                </Grid.RowDefinitions>
+
+                                <Label Content="Name:" Grid.Column="0" Grid.Row="0" Foreground="White" />
+                                <Label Content="{Binding Name}" Grid.Column="1" Grid.Row="0" Foreground="White" />
+
+                                <Label Content="Age:" Grid.Column="0" Grid.Row="1" Foreground="White"/>
+                                <Label Content="{Binding Age}" Grid.Column="1" Grid.Row="1" Foreground="White"/>
+                                
+                                <Label Content="Address:" Grid.Column="0" Grid.Row="2" Foreground="White"/>
+                                <Label Content="{Binding Address}" Grid.Column="1" Grid.Row="2" Foreground="White"/>
+
+                                <Label Content="Disease:" Grid.Column="0" Grid.Row="3" Foreground="White"/>
+                                <Label Content="{Binding Disease}" Grid.Column="1" Grid.Row="3" Foreground="White"/>
+
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+            <StackPanel Grid.Column="2" Grid.Row="1">
+                <Label BorderThickness="5" BorderBrush="black" Content="Add/Update Panel"
+                       Background="LightPink" FontSize="60" HorizontalContentAlignment="Center" Margin="0 0 0 30"/>
+
+                <Label Content="Name" Background="LightPink" FontSize="60" HorizontalContentAlignment="Center"/>
+                <TextBox Text="{Binding SelectedPatient.Name}" FontSize="60" HorizontalContentAlignment="Center"/>
+
+                <Label Content="Age" Background="LightPink" FontSize="60" HorizontalContentAlignment="Center" Margin="0 30 0 0"/>
+                <TextBox Text="{Binding SelectedPatient.Age}" FontSize="60" HorizontalContentAlignment="Center"/>
+
+                <Label Content="Address" Background="LightPink" FontSize="60" HorizontalContentAlignment="Center" Margin="0 30 0 0"/>
+                <TextBox Text="{Binding SelectedPatient.Address}" FontSize="60" HorizontalContentAlignment="Center"/>
+
+                <Label Content="Disease" Background="LightPink" FontSize="60" HorizontalContentAlignment="Center" Margin="0 30 0 0"/>
+                <TextBox Text="{Binding SelectedPatient.Disease}" FontSize="60" HorizontalContentAlignment="Center"/>
+
+            </StackPanel>
+
+        </Grid>
+
+        <Grid x:Name="DoctorWindow" Visibility="{Binding ShowDoctors, Converter={StaticResource visibilityConverter}}">
+            <!--Visibility="{Binding ShowHospitals, Converter={StaticResource visibilityConverter}}"-->
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="9*"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="15*"/>
+                <ColumnDefinition Width="9*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Orientation="Horizontal" Grid.Column="1" Background="Gray"  Grid.ColumnSpan="2" >
+                <Button Content="ADD" Background="White" BorderBrush="Black" BorderThickness="5"
+                        FontFamily="Courier New" FontWeight="DemiBold" FontSize="60" Padding="30 0" Margin="10"
+                        Command="{Binding CreateDoctorCommand}">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="30"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+
+                <Button Content="UPDATE" Background="White" BorderBrush="Black" BorderThickness="5"
+                        FontFamily="Courier New" FontWeight="DemiBold" FontSize="60" Padding="20 0" Margin="10"
+                        Command="{Binding UpdateDoctorCommand}">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="30"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+
+                <Button Content="DELETE" Background="White" BorderBrush="Black" BorderThickness="5"
+                        FontFamily="Courier New" FontWeight="DemiBold" FontSize="60" Padding="20 0" Margin="10"
+                        Command="{Binding DeleteDoctorCommand}">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="30"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+
+                <Button Content="SAVE AS TXT" Background="White" BorderBrush="Black" BorderThickness="5"
+                        FontFamily="Courier New" FontWeight="DemiBold" FontSize="60" Padding="20 0" Margin="10"
+                        Command="">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="30"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </StackPanel>
+
+
+            <Button Command="{Binding BackCommand}" Grid.Column="0" Grid.Row="0" Background="LightSlateGray" Foreground="White" 
+                    Content="&#57366;" FontSize="70" FontWeight="Bold" FontFamily="Segoe UI Symbol"/>
+            <!--&#57557; &#57366;-->
+
+
+            <ListBox  HorizontalContentAlignment="Stretch" SelectedItem="{Binding SelectedDoctor}" 
+                     FontSize="40" Grid.ColumnSpan="2" Grid.Row="1" Background="Transparent"
+                     ItemsSource="{Binding Doctors}" >
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border Margin="0 10" Background="Teal" CornerRadius="15" BorderThickness="3" BorderBrush="Black">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="1*"/>
+                                    <RowDefinition Height="1*"/>
+                                </Grid.RowDefinitions>
+
+                                <Label Content="Name:" Grid.Column="0" Grid.Row="0" Foreground="White" />
+                                <Label Content="{Binding Name}" Grid.Column="1" Grid.Row="0" Foreground="White" />
+
+                                <Label Content="Specialization:" Grid.Column="0" Grid.Row="1" Foreground="White"/>
+                                <Label Content="{Binding Specialization}" Grid.Column="1" Grid.Row="1" Foreground="White"/>                               
+
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+            <StackPanel Grid.Column="2" Grid.Row="1">
+                <Label BorderThickness="5" BorderBrush="black" Content="Add/Update Panel"
+                       Background="LightPink" FontSize="60" HorizontalContentAlignment="Center" Margin="0 0 0 50"/>
+                
+                <Label Content="Name" Background="LightPink" FontSize="60" HorizontalContentAlignment="Center"/>
+                <TextBox Text="{Binding SelectedDoctor.Name}" FontSize="60" HorizontalContentAlignment="Center"/>
+                
+                <Label Content="Specialization" Background="LightPink" FontSize="60" HorizontalContentAlignment="Center" Margin="0 30 0 0"/>
+                <TextBox Text="{Binding SelectedDoctor.Specialization}" FontSize="60" HorizontalContentAlignment="Center"/>
+ 
+            </StackPanel>
+
+        </Grid>
+
+        <Grid x:Name="HospitalWindow" Visibility="{Binding ShowHospitals, Converter={StaticResource visibilityConverter}}">
             <!--Visibility="{Binding ShowHospitals, Converter={StaticResource visibilityConverter}}"-->
 
             <Grid.RowDefinitions>
@@ -90,7 +314,7 @@
                     </Button.Resources>
                 </Button>
 
-                <Button Content="SAVE AS" Background="White" BorderBrush="Black" BorderThickness="5"
+                <Button Content="SAVE AS TXT" Background="White" BorderBrush="Black" BorderThickness="5"
                         FontFamily="Courier New" FontWeight="DemiBold" FontSize="60" Padding="20 0" Margin="10"
                         Command="">
                     <Button.Resources>
@@ -107,22 +331,45 @@
             <!--&#57557; &#57366;-->
 
 
-            <ListBox SelectedItem="{Binding SelectedHospital}" FontSize="80" Grid.ColumnSpan="2" Grid.Row="1" Background="Transparent" ItemsSource="{Binding Hospitals}" >
+            <ListBox  HorizontalContentAlignment="Stretch" SelectedItem="{Binding SelectedHospital}" 
+                     FontSize="40" Grid.ColumnSpan="2" Grid.Row="1" Background="Transparent"
+                     ItemsSource="{Binding Hospitals}" >
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <Border CornerRadius="5" BorderThickness="2" BorderBrush="Black">
-                            <Label Content="{Binding AllData}"/>
+                        <Border Margin="0 10" Background="Teal" CornerRadius="15" BorderThickness="3" BorderBrush="Black">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="3*"/>
+                                    <RowDefinition Height="3*"/>
+                                </Grid.RowDefinitions>
+
+                                <Label Content="Name:" Grid.Column="0" Grid.Row="0" Foreground="White" />
+                                <Label Content="{Binding Name}" Grid.Column="1" Grid.Row="0" Foreground="White" />
+
+                                <Label Content="Location:" Grid.Column="0" Grid.Row="1" Foreground="White"/>
+                                <Label Content="{Binding Location}" Grid.Column="1" Grid.Row="1" Foreground="White"/>
+
+                            </Grid>
                         </Border>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
 
             <StackPanel Grid.Column="2" Grid.Row="1">
+                <Label BorderThickness="5" BorderBrush="black" Content="Add/Update Panel"
+                       Background="LightPink" FontSize="60" HorizontalContentAlignment="Center" Margin="0 0 0 50"/>
+                
                 <Label Content="Name" Background="LightPink" FontSize="60" HorizontalContentAlignment="Center"/>
                 <TextBox Text="{Binding SelectedHospital.Name}" FontSize="60" HorizontalContentAlignment="Center"/>
                 
-                <Label Content="Location" Background="LightPink" FontSize="60" HorizontalContentAlignment="Center"/>
+                <Label Content="Location" Background="LightPink" FontSize="60" HorizontalContentAlignment="Center" Margin="0 30 0 0"/>
                 <TextBox Text="{Binding SelectedHospital.Location}" FontSize="60" HorizontalContentAlignment="Center"/>
+
             </StackPanel>
 
         </Grid>

@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace OW21BB_HFT_2021221.WPFClient.Services
 {
-    public interface IEditorService<T> where T : class
+    public static class Util
     {
-        void Edit(T t);
+        public static Random rnd = new Random();
     }
 }

@@ -48,7 +48,7 @@ namespace OW21BB_HFT_2021221.Models
         public Hospital GetCopy(Hospital value)
         {
             return new Hospital()
-            {
+            {                
                 HospitalID = value.HospitalID,
                 Name = value.Name,
                 Location = value.Location,

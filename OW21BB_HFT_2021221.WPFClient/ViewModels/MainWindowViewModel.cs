@@ -1,6 +1,7 @@
 ﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
 using OW21BB_HFT_2021221.Models;
+using OW21BB_HFT_2021221.WPFClient.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -27,9 +28,6 @@ namespace OW21BB_HFT_2021221.WPFClient.ViewModels
         {
             get { return new SolidColorBrush(Color.FromRgb(153, 217, 234)); }
         }
-
-
-
 
 
         public static bool IsInDesignMode
@@ -135,6 +133,7 @@ namespace OW21BB_HFT_2021221.WPFClient.ViewModels
                     selectedHospital = selectedHospital.GetCopy(value);
                     OnPropertyChanged();
 
+                    (UpdateHospitalCommand as RelayCommand).NotifyCanExecuteChanged();
                     (DeleteHospitalCommand as RelayCommand).NotifyCanExecuteChanged();
                 }
             }
@@ -211,55 +210,51 @@ namespace OW21BB_HFT_2021221.WPFClient.ViewModels
         {
             CreateHospitalCommand = new RelayCommand(() =>
             {
-                Hospitals.Add(new Hospital().GetCopy(SelectedHospital));
+                Hospitals.Add(new Hospital()
+                {
+                    Name = SelectedHospital.Name,
+                    Location = SelectedHospital.Location,
+                });
             });
 
             DeleteHospitalCommand = new RelayCommand(() =>
             {
                 Hospitals.Delete(SelectedHospital.HospitalID);
-            },
-            () =>
-            {
-                return SelectedHospital.Name != null;
-            }
-            );
+            });
 
             UpdateHospitalCommand = new RelayCommand(() =>
-            {
-                
+            {                
                 Hospitals.Update(SelectedHospital);
             });
 
             selectedHospital = new Hospital();
+
+
         }
 
         private void SetupDoctorCommands()
         {
             CreateDoctorCommand = new RelayCommand(() =>
             {
+                var assignedHospital = AssignHospital();
                 Doctors.Add(new Doctor()
                 {
-                    Name = SelectedDoctor.Name
+                    Name = SelectedDoctor.Name,
+                    Specialization = SelectedDoctor.Specialization,
+                    HospitalID = assignedHospital?.HospitalID,
+                    Hospital = assignedHospital
+
                 });
             });
 
             DeleteDoctorCommand = new RelayCommand(() =>
             {
                 Doctors.Delete(SelectedDoctor.DoctorID);
-            },
-            () =>
-            {
-                return SelectedDoctor.Name != null;
-            }
-            );
+            });
 
             UpdateDoctorCommand = new RelayCommand(() =>
             {
                 Doctors.Update(SelectedDoctor);
-            },
-            () =>
-            {
-                return SelectedDoctor != null;
             });
 
             selectedDoctor = new Doctor();
@@ -269,29 +264,26 @@ namespace OW21BB_HFT_2021221.WPFClient.ViewModels
         {
             CreatePatientCommand = new RelayCommand(() =>
             {
+                var assignedDoctor = AssignDoctor();
                 Patients.Add(new Patient()
                 {
-                    Name = SelectedPatient.Name
+                    Name = SelectedPatient.Name,
+                    Address = SelectedPatient.Address,
+                    Age = SelectedPatient.Age,
+                    Disease = SelectedPatient.Disease,
+                    DoctorID = assignedDoctor?.DoctorID,
+                    Doctor = assignedDoctor
                 });
             });
 
             DeletePatientCommand = new RelayCommand(() =>
             {
                 Patients.Delete(SelectedPatient.PatientID);
-            },
-            () =>
-            {
-                return SelectedPatient.Name != null;
-            }
-            );
+            });
 
             UpdatePatientCommand = new RelayCommand(() =>
             {
                 Patients.Update(SelectedPatient);
-            },
-            () =>
-            {
-                return SelectedPatient != null;
             });
 
             selectedPatient = new Patient();
@@ -333,6 +325,18 @@ namespace OW21BB_HFT_2021221.WPFClient.ViewModels
                 this.ShowPatients = false;
                 this.ShowMenu = true;
             });
+        }
+
+
+
+        private Hospital? AssignHospital()
+        {
+            return Hospitals.ElementAtOrDefault(Util.rnd.Next(0, Hospitals.Count()));
+        }
+
+        private Doctor? AssignDoctor()
+        {
+            return Doctors.ElementAt(Util.rnd.Next(0, Doctors.Count()));
         }
     }
 }
