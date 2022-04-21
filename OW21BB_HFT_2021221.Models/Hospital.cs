@@ -34,7 +34,7 @@ namespace OW21BB_HFT_2021221.Models
         }
 
         [NotMapped]
-        public string AllData => $"[{HospitalID}] -> {Name} - {Location}";
+        public string AllData => $"{Name} - {Location}";
 
         [NotMapped]
         [JsonIgnore]
@@ -43,6 +43,17 @@ namespace OW21BB_HFT_2021221.Models
         public Hospital()
         {
             this.Doctors = new HashSet<Doctor>();
+        }
+
+        public Hospital GetCopy(Hospital value)
+        {
+            return new Hospital()
+            {
+                HospitalID = value.HospitalID,
+                Name = value.Name,
+                Location = value.Location,
+                Doctors = value.Doctors                
+            };
         }
     }
 }

@@ -3,12 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:OW21BB_HFT_2021221.WPFClient"
+        xmlns:vms="clr-namespace:OW21BB_HFT_2021221.WPFClient.ViewModels"
         xmlns:services="clr-namespace:OW21BB_HFT_2021221.WPFClient.Services"
         mc:Ignorable="d"
         Title="Healthcare Database" Height="1080" Width="1920" WindowState="Maximized">
     <Window.DataContext>
-        <local:MainWindowViewModel/>
+        <vms:MainWindowViewModel/>
     </Window.DataContext>
     <Window.Resources>
         <services:BoolToVisibilityConverter x:Key="visibilityConverter"/>
@@ -45,7 +45,7 @@
             </StackPanel>
         </Grid>
 
-        <Grid x:Name="HositalWindow" Visibility="Visible">
+        <Grid x:Name="HositalWindow" Visibility="{Binding ShowHospitals, Converter={StaticResource visibilityConverter}}">
             <!--Visibility="{Binding ShowHospitals, Converter={StaticResource visibilityConverter}}"-->
 
             <Grid.RowDefinitions>
@@ -55,20 +55,78 @@
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="15*"/>
                 <ColumnDefinition Width="9*"/>
             </Grid.ColumnDefinitions>
+
+            <StackPanel Orientation="Horizontal" Grid.Column="1" Background="Gray"  Grid.ColumnSpan="2" >
+                <Button Content="ADD" Background="White" BorderBrush="Black" BorderThickness="5"
+                        FontFamily="Courier New" FontWeight="DemiBold" FontSize="60" Padding="30 0" Margin="10"
+                        Command="{Binding CreateHospitalCommand}">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="30"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+
+                <Button Content="UPDATE" Background="White" BorderBrush="Black" BorderThickness="5"
+                        FontFamily="Courier New" FontWeight="DemiBold" FontSize="60" Padding="20 0" Margin="10"
+                        Command="{Binding UpdateHospitalCommand}">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="30"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+
+                <Button Content="DELETE" Background="White" BorderBrush="Black" BorderThickness="5"
+                        FontFamily="Courier New" FontWeight="DemiBold" FontSize="60" Padding="20 0" Margin="10"
+                        Command="{Binding DeleteHospitalCommand}">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="30"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+
+                <Button Content="SAVE AS" Background="White" BorderBrush="Black" BorderThickness="5"
+                        FontFamily="Courier New" FontWeight="DemiBold" FontSize="60" Padding="20 0" Margin="10"
+                        Command="">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="30"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </StackPanel>
+
 
             <Button Command="{Binding BackCommand}" Grid.Column="0" Grid.Row="0" Background="LightSlateGray" Foreground="White" 
                     Content="&#57366;" FontSize="70" FontWeight="Bold" FontFamily="Segoe UI Symbol"/>
             <!--&#57557; &#57366;-->
-            <ListBox FontSize="80" Grid.Row="1" Grid.ColumnSpan="2" Background="Transparent" ItemsSource="{Binding Hospitals}">
+
+
+            <ListBox SelectedItem="{Binding SelectedHospital}" FontSize="80" Grid.ColumnSpan="2" Grid.Row="1" Background="Transparent" ItemsSource="{Binding Hospitals}" >
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <Label Content="{Binding AllData}"/>
+                        <Border CornerRadius="5" BorderThickness="2" BorderBrush="Black">
+                            <Label Content="{Binding AllData}"/>
+                        </Border>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
+
+            <StackPanel Grid.Column="2" Grid.Row="1">
+                <Label Content="Name" Background="LightPink" FontSize="60" HorizontalContentAlignment="Center"/>
+                <TextBox Text="{Binding SelectedHospital.Name}" FontSize="60" HorizontalContentAlignment="Center"/>
+                
+                <Label Content="Location" Background="LightPink" FontSize="60" HorizontalContentAlignment="Center"/>
+                <TextBox Text="{Binding SelectedHospital.Location}" FontSize="60" HorizontalContentAlignment="Center"/>
+            </StackPanel>
+
         </Grid>
+
 
     </Grid>
 

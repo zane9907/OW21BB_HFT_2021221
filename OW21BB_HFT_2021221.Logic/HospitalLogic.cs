@@ -68,17 +68,15 @@ namespace OW21BB_HFT_2021221.Logic
         }
 
         public Hospital GetHospitalById(int id)
-        {        
+        {
 
-
-            int hospitalCount = hospitalRepo.GetAll().Count();
-            if (id <= hospitalCount)
+            if (hospitalRepo.GetAll().Any(x=>x.HospitalID.Equals(id)))
             {
                 return hospitalRepo.Get(id);
             }
             else
             {
-                throw new IndexOutOfRangeException("{ERROR} ID was too big!");
+                throw new IndexOutOfRangeException("{ERROR} The item does not exist! "+  $"(ID: {id})");
             }
 
 

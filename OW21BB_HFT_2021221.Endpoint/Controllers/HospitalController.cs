@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
+using OW21BB_HFT_2021221.Endpoint.Services;
 using OW21BB_HFT_2021221.Logic;
 using OW21BB_HFT_2021221.Models;
 using System;
@@ -14,10 +16,12 @@ namespace OW21BB_HFT_2021221.Endpoint.Controllers
     public class HospitalController : ControllerBase
     {
         IHospitalLogic hospLogic;
+        IHubContext<SignalRHub> hub;
 
-        public HospitalController(IHospitalLogic hospLogic)
+        public HospitalController(IHospitalLogic hospLogic, IHubContext<SignalRHub> hub)
         {
             this.hospLogic = hospLogic;
+            this.hub = hub;
         }
 
         //GET: /hospital
@@ -40,6 +44,8 @@ namespace OW21BB_HFT_2021221.Endpoint.Controllers
         public void Post([FromBody] Hospital value)
         {
             hospLogic.AddNewHospital(value);
+            hub.Clients.All.SendAsync("HospitalCreated", value);
+
         }
 
         // PUT: /hospital
@@ -47,13 +53,18 @@ namespace OW21BB_HFT_2021221.Endpoint.Controllers
         public void Put([FromBody] Hospital value)
         {
             hospLogic.UpdateHospital(value);
+            hub.Clients.All.SendAsync("HospitalUpdated", value);
+
         }
 
         // Delete /hospital/{id}
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            var hosp = hospLogic.GetHospitalById(id);
             hospLogic.DeleteHospital(id);
+            hub.Clients.All.SendAsync("HospitalDeleted", hosp);
+
         }
 
     }

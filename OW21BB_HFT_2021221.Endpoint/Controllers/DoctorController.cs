@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
+using OW21BB_HFT_2021221.Endpoint.Services;
 using OW21BB_HFT_2021221.Logic;
 using OW21BB_HFT_2021221.Models;
 using System;
@@ -16,10 +18,12 @@ namespace OW21BB_HFT_2021221.Endpoint.Controllers
     public class DoctorController : ControllerBase
     {
         IDoctorLogic docLogic;
+        IHubContext<SignalRHub> hub;
 
-        public DoctorController(IDoctorLogic docLogic)
+        public DoctorController(IDoctorLogic docLogic, IHubContext<SignalRHub> hub)
         {
             this.docLogic = docLogic;
+            this.hub = hub;
         }
 
 
@@ -42,6 +46,8 @@ namespace OW21BB_HFT_2021221.Endpoint.Controllers
         public void Post([FromBody] Doctor value)
         {
             docLogic.AddNewDoctor(value);
+            hub.Clients.All.SendAsync("DoctorCreated", value);
+
         }
 
         // PUT /doctor
@@ -49,13 +55,18 @@ namespace OW21BB_HFT_2021221.Endpoint.Controllers
         public void Put([FromBody] Doctor value)
         {
             docLogic.UpdateDoctor(value);
+            hub.Clients.All.SendAsync("DoctorUpdated", value);
+
         }
 
         // DELETE /doctor/id
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            var doc = docLogic.GetDoctorById(id);
             docLogic.DeleteDoctor(id);
+            hub.Clients.All.SendAsync("DoctorDeleted", doc);
+
         }
     }
 }

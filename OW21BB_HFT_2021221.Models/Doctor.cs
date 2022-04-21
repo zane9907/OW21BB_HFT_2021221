@@ -52,5 +52,18 @@ namespace OW21BB_HFT_2021221.Models
             this.Patients = new HashSet<Patient>();
         }
 
+        public Doctor GetCopy(Doctor value)
+        {
+            return new Doctor()
+            {
+                DoctorID = value.DoctorID,
+                Name = value.Name,
+                Specialization = value.Specialization,
+                HospitalID = value.HospitalID,
+                Hospital = value.Hospital,
+                Patients = value.Patients
+            };
+        }
+
     }
 }

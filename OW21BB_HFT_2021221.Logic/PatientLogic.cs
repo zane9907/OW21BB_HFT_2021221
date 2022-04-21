@@ -44,7 +44,7 @@ namespace OW21BB_HFT_2021221.Logic
 
         public Patient GetPatientById(int id)
         {
-            if (id <= patientRepository.GetAll().Count())
+            if (patientRepository.GetAll().Any(x=>x.PatientID.Equals(id)))
             {
                 return patientRepository.Get(id); 
             }

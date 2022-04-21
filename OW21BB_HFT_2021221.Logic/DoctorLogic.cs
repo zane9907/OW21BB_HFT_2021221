@@ -56,7 +56,7 @@ namespace OW21BB_HFT_2021221.Logic
         public Doctor GetDoctorById(int id)
         {
 
-            if (id <= doctorRepository.GetAll().Count())
+            if (doctorRepository.GetAll().Any(x=>x.DoctorID.Equals(id)))
             {
                 return doctorRepository.Get(id);
             }
