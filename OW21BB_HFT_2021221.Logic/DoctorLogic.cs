@@ -42,15 +42,15 @@ namespace OW21BB_HFT_2021221.Logic
 
         public IEnumerable<Doctor> GetAllDoctors()
         {
-            var doctorList = doctorRepository.GetAll().ToList();
-            if (doctorList.Count != 0)
-            {
-                return doctorList;
-            }
-            else
-            {
-                throw new ListIsEmptyException("GetAllDoctors");
-            }
+            return doctorRepository.GetAll();
+            //if (doctorList.Count != 0)
+            //{
+            //    return doctorList;
+            //}
+            //else
+            //{
+            //    throw new ListIsEmptyException("GetAllDoctors");
+            //}
         }
 
         public Doctor GetDoctorById(int id)

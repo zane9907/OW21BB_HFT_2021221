@@ -188,9 +188,15 @@ namespace OW21BB_HFT_2021221.WPFClient.ViewModels
         {
             if (!IsInDesignMode)
             {
+
                 Hospitals = new RestCollection<Hospital>("http://localhost:41147/", "hospital", "hub");
+
+
                 Doctors = new RestCollection<Doctor>("http://localhost:41147/", "doctor", "hub");
+
+
                 Patients = new RestCollection<Patient>("http://localhost:41147/", "patient", "hub");
+
 
                 this.showMenu = true;
                 this.showHospitals = false;
@@ -223,7 +229,7 @@ namespace OW21BB_HFT_2021221.WPFClient.ViewModels
             });
 
             UpdateHospitalCommand = new RelayCommand(() =>
-            {                
+            {
                 Hospitals.Update(SelectedHospital);
             });
 
@@ -302,6 +308,7 @@ namespace OW21BB_HFT_2021221.WPFClient.ViewModels
 
             ManageDoctorsCommand = new RelayCommand(() =>
             {
+
                 this.ShowHospitals = false;
                 this.ShowDoctors = true;
                 this.ShowPatients = false;
@@ -310,6 +317,7 @@ namespace OW21BB_HFT_2021221.WPFClient.ViewModels
 
             ManagePatientsCommand = new RelayCommand(() =>
             {
+
                 this.ShowHospitals = false;
                 this.ShowDoctors = false;
                 this.ShowPatients = true;

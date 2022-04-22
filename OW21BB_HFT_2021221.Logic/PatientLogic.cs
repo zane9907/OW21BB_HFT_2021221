@@ -30,15 +30,15 @@ namespace OW21BB_HFT_2021221.Logic
 
         public IEnumerable<Patient> GetAllPatients()
         {
-            var patientList = patientRepository.GetAll().ToList();
-            if (patientList.Count != 0)
-            {
-                return patientList;
-            }
-            else
-            {
-                throw new ListIsEmptyException("GetAllPatients");
-            }
+            return patientRepository.GetAll();
+            //if (patientList.Count() != 0)
+            //{
+            //    return patientList;
+            //}
+            //else
+            //{
+            //    throw new ListIsEmptyException("GetAllPatients");
+            //}
 
         }
 

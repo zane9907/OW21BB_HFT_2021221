@@ -56,15 +56,15 @@ namespace OW21BB_HFT_2021221.Logic
 
         public IEnumerable<Hospital> GetAllHospitals()
         {
-            var hospitalList = hospitalRepo.GetAll().ToList();
-            if (hospitalList.Count != 0)
-            {
-                return hospitalList;
-            }
-            else
-            {
-                throw new ListIsEmptyException("GetAllDoctors");
-            }
+            return hospitalRepo.GetAll();
+            //if (hospitalList.Count() != 0)
+            //{
+            //    return hospitalList;
+            //}
+            //else
+            //{
+            //    throw new ListIsEmptyException("GetAllDoctors");
+            //}
         }
 
         public Hospital GetHospitalById(int id)
