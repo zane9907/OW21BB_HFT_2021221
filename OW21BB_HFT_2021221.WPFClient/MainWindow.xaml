@@ -15,7 +15,9 @@
     </Window.Resources>
 
     <Grid x:Name="grid" Background="{Binding BackGroundColor}">
-        <Grid Visibility="{Binding ShowMenu, Converter={StaticResource visibilityConverter}}">
+        
+        
+        <Grid x:Name="MainMenu" Visibility="{Binding ShowMenu, Converter={StaticResource visibilityConverter}}">
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
@@ -90,7 +92,7 @@
                     </Button.Resources>
                 </Button>
 
-                <Button Content="SAVE AS TXT" Background="White" BorderBrush="Black" BorderThickness="5"
+                <!--<Button Content="SAVE AS TXT" Background="White" BorderBrush="Black" BorderThickness="5"
                         FontFamily="Courier New" FontWeight="DemiBold" FontSize="60" Padding="20 0" Margin="10"
                         Command="">
                     <Button.Resources>
@@ -98,7 +100,7 @@
                             <Setter Property="CornerRadius" Value="30"/>
                         </Style>
                     </Button.Resources>
-                </Button>
+                </Button>-->
             </StackPanel>
 
 
@@ -209,7 +211,7 @@
                     </Button.Resources>
                 </Button>
 
-                <Button Content="SAVE AS TXT" Background="White" BorderBrush="Black" BorderThickness="5"
+                <!--<Button Content="SAVE AS TXT" Background="White" BorderBrush="Black" BorderThickness="5"
                         FontFamily="Courier New" FontWeight="DemiBold" FontSize="60" Padding="20 0" Margin="10"
                         Command="">
                     <Button.Resources>
@@ -217,7 +219,7 @@
                             <Setter Property="CornerRadius" Value="30"/>
                         </Style>
                     </Button.Resources>
-                </Button>
+                </Button>-->
             </StackPanel>
 
 
@@ -314,7 +316,7 @@
                     </Button.Resources>
                 </Button>
 
-                <Button Content="SAVE AS TXT" Background="White" BorderBrush="Black" BorderThickness="5"
+                <!--<Button Content="SAVE AS TXT" Background="White" BorderBrush="Black" BorderThickness="5"
                         FontFamily="Courier New" FontWeight="DemiBold" FontSize="60" Padding="20 0" Margin="10"
                         Command="">
                     <Button.Resources>
@@ -322,7 +324,7 @@
                             <Setter Property="CornerRadius" Value="30"/>
                         </Style>
                     </Button.Resources>
-                </Button>
+                </Button>-->
             </StackPanel>
 
 

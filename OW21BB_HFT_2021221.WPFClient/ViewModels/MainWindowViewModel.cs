@@ -71,7 +71,7 @@ namespace OW21BB_HFT_2021221.WPFClient.ViewModels
         #region Properties
 
 
-
+        //
         private bool showMenu;
 
         public bool ShowMenu
@@ -82,6 +82,10 @@ namespace OW21BB_HFT_2021221.WPFClient.ViewModels
                 SetProperty(ref showMenu, value);
             }
         }
+        //
+
+
+
 
         private bool showHospitals;
 
@@ -299,9 +303,10 @@ namespace OW21BB_HFT_2021221.WPFClient.ViewModels
         {
             ManageHospitalsCommand = new RelayCommand(() =>
             {
+                //this.ShowDoctors = false;
+                //this.ShowPatients = false;
+
                 this.ShowHospitals = true;
-                this.ShowDoctors = false;
-                this.ShowPatients = false;
                 this.ShowMenu = false;
 
             });
@@ -309,17 +314,19 @@ namespace OW21BB_HFT_2021221.WPFClient.ViewModels
             ManageDoctorsCommand = new RelayCommand(() =>
             {
 
-                this.ShowHospitals = false;
+                //this.ShowHospitals = false;
+                //this.ShowPatients = false;
+
                 this.ShowDoctors = true;
-                this.ShowPatients = false;
                 this.ShowMenu = false;
             });
 
             ManagePatientsCommand = new RelayCommand(() =>
             {
 
-                this.ShowHospitals = false;
-                this.ShowDoctors = false;
+                //this.ShowHospitals = false;
+                //this.ShowDoctors = false;
+
                 this.ShowPatients = true;
                 this.ShowMenu = false;
             });
