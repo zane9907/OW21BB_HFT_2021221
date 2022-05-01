@@ -22,8 +22,8 @@ namespace OW21BB_HFT_2021221.WPFClient
     public partial class MainWindow : Window
     {
         public MainWindow()
-        {            
-            InitializeComponent();
+        {
+                InitializeComponent();
         }
     }
 }
