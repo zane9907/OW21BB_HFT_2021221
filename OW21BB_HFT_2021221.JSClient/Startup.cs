@@ -28,6 +28,8 @@ namespace OW21BB_HFT_2021221.JSClient
 
             app.UseRouting();
 
+            app.UseStaticFiles();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapGet("/", async context =>
