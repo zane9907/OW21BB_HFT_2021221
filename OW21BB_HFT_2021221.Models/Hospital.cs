@@ -25,13 +25,13 @@ namespace OW21BB_HFT_2021221.Models
         public string Location { get; set; }
 
            
-        public int DoctorCount
-        {
-            get
-            {
-                return this.Doctors.Count();
-            }
-        }
+        //public int DoctorCount
+        //{
+        //    get
+        //    {
+        //        return this.Doctors.Count();
+        //    }
+        //}
 
         [NotMapped]
         public string AllData => $"{Name} - {Location}";

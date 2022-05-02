@@ -62,7 +62,14 @@ namespace OW21BB_HFT_2021221.Endpoint
                 await context.Response.WriteAsJsonAsync(response);
             }));
 
+            app.UseCors(x => x.AllowCredentials()
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .WithOrigins("http://localhost:57746"));
+
             app.UseRouting();
+
+
 
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>
