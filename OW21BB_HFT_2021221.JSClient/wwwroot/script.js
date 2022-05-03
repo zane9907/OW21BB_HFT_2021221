@@ -49,7 +49,6 @@ async function getdata() {
             //console.log(hospitals);
             display();
         });
-
 }
 
 function display() {
