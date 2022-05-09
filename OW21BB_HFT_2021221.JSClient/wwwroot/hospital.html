@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Healthcare Database</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>Hospital Catalog</h1>
+    <div class="Backbutton">
+        <a id="back" href="./index.html">BACK</a>
+    </div>
+    
+
+    <div id="formdiv">
+        <label>Hospital Name</label>
+        <input type="text" id="hospitalname"/>
+
+        <label>Hospital Location</label>
+        <input type="text" id="hospitallocation"/>
+        <button onclick="create()" type="button">Add Hospital</button>
+    </div>
+
+    
+
+    <div id="updateformdiv">
+        <label>Hospital Name</label>
+        <input type="text" id="hospitalnametoupdate"/>
+        
+        <label>Hospital Location</label>
+        <input type="text" id="hospitallocationtoupdate"/>
+        <button onclick="update()" type="button">Update Hospital</button>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="resultarea">
+            
+        </tbody>
+    </table>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

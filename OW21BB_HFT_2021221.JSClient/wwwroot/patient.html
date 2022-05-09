@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Patient Catalog</h1>
+    <div class="Backbutton">
+        <a id="back" href="./index.html">BACK</a>
+    </div>
+    
+
+    <div id="formdiv">
+        <label>Patient Name</label>
+        <input type="text" id="patientname"/>
+
+        <label>Patient Age</label>
+        <input type="text" id="patientspec"/>
+
+        <label>Patient Address</label>
+        <input type="text" id="patientaddress"/>
+
+        <label>Patient Disease</label>
+        <input type="text" id="patientdisease"/>
+        <button onclick="create()" type="button">Add Patient</button>
+    </div>
+
+    
+
+    <div id="updateformdiv">
+        <label>Patient Name</label>
+        <input type="text" id="patientnametoupdate"/>
+        
+        <label>Patient Age</label>
+        <input type="text" id="patientagetoupdate"/>
+        
+        <label>Patient Address</label>
+        <input type="text" id="patientaddresstoupdate"/>
+        
+        <label>Patient Disease</label>
+        <input type="text" id="patientdiseasetoupdate"/>
+        <button onclick="update()" type="button">Update Patient</button>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Address</th>
+                <th>Disease</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="resultarea">
+            
+        </tbody>
+    </table>
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
+    <script src="patientscript.js"></script>
+</body>
+</html>

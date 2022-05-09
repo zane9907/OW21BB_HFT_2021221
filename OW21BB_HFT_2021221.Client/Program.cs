@@ -496,7 +496,7 @@ namespace OW21BB_HFT_2021221.Client
                 Console.Clear();
 
                 var hos = rs.GetSingle<Hospital>($"{model}/{id}");
-                Console.WriteLine($"{hos.AllData} - Doctors: {hos.DoctorCount}");
+                Console.WriteLine($"{hos.AllData} - Doctors");
 
             }
             else if (model == "doctor")

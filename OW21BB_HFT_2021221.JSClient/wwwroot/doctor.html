@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Doctor Catalog</h1>
+    <div class="Backbutton">
+        <a id="back" href="./index.html">BACK</a>
+    </div>
+    
+
+    <div id="formdiv">
+        <label>Doctor Name</label>
+        <input type="text" id="doctorname"/>
+
+        <label>Doctor Specialization</label>
+        <input type="text" id="doctorspec"/>
+        <button onclick="create()" type="button">Add Doctor</button>
+    </div>
+
+    
+
+    <div id="updateformdiv">
+        <label>Doctor Name</label>
+        <input type="text" id="doctornametoupdate"/>
+        
+        <label>Doctor Specialization</label>
+        <input type="text" id="doctorspectoupdate"/>
+        <button onclick="update()" type="button">Update Doctor</button>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Specialization</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="resultarea">
+            
+        </tbody>
+    </table>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
+
+    <script src="doctorscript.js"></script>
+</body>
+</html>

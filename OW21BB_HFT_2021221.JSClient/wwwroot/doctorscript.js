@@ -1,7 +1,7 @@
-﻿let hospitals = [];
+﻿let doctors = [];
 let connection = null;
 
-let hospitalIdToUpdate = -1;
+let doctorIdToUpdate = -1;
 
 getdata();
 setupSignalR();
@@ -12,15 +12,15 @@ function setupSignalR(){
     .configureLogging(signalR.LogLevel.Information)
     .build();
 
-    connection.on("HospitalCreated",(user,message) =>{
+    connection.on("DoctorCreated",(user,message) =>{
         getdata();
     });
 
-    connection.on("HospitalDeleted",(user,message) =>{
+    connection.on("DoctorDeleted",(user,message) =>{
         getdata();
     });
 
-    connection.on("HospitalUpdated",(user,message) =>{
+    connection.on("DoctorUpdated",(user,message) =>{
         getdata();
     });
 
@@ -42,10 +42,10 @@ async function start() {
 
 
 async function getdata() {
-    fetch('http://localhost:41147/hospital')
+    fetch('http://localhost:41147/doctor')
         .then(x => x.json())
         .then(y => {
-            hospitals = y;
+            doctors = y;
             //console.log(hospitals);
             display();
         });
@@ -53,39 +53,39 @@ async function getdata() {
 
 function display() {
     document.getElementById('resultarea').innerHTML = "";
-    hospitals.forEach(hospital => {
-        document.getElementById('resultarea').innerHTML += "<tr><td>" + hospital.hospitalID + "</td><td>"
-            + hospital.name + "</td><td>" 
-            + hospital.location + "</td><td>" 
-            + `<button type="button" onclick="remove(${hospital.hospitalID})">Delete</button>`
-            + `<button type="button" onclick="showupdate(${hospital.hospitalID})">Update</button>`
+    doctors.forEach(doctor => {
+        document.getElementById('resultarea').innerHTML += "<tr><td>" + doctor.doctorID + "</td><td>"
+            + doctor.name + "</td><td>" 
+            + doctor.specialization + "</td><td>" 
+            + `<button type="button" onclick="remove(${doctor.doctorID})">Delete</button>`
+            + `<button type="button" onclick="showupdate(${doctor.doctorID})">Update</button>`
             + "</td></tr>";
         //console.log(hospital.name);
     });
 }
 
 function showupdate(id){
-    document.getElementById('hospitalnametoupdate').value = 
-    hospitals.find(x=>x['hospitalID'] == id)['name'];
+    document.getElementById('doctornametoupdate').value = 
+    doctors.find(x=>x['doctorID'] == id)['name'];
 
-    document.getElementById('hospitallocationtoupdate').value = 
-    hospitals.find(x=>x['hospitalID'] == id)['location'];
+    document.getElementById('doctorspectoupdate').value = 
+    doctors.find(x=>x['doctorID'] == id)['specialization'];
 
     document.getElementById('updateformdiv').style.display = "flex";
-    hospitalIdToUpdate = id;
+   doctorIdToUpdate = id;
 }
 
 function update() {
-    let name = document.getElementById('hospitalnametoupdate').value;
-    let location = document.getElementById('hospitallocationtoupdate').value;
+    let name = document.getElementById('doctornametoupdate').value;
+    let spec = document.getElementById('doctorspectoupdate').value;
 
     document.getElementById('updateformdiv').style.display = 'none';
 
-    fetch('http://localhost:41147/hospital', {
+    fetch('http://localhost:41147/doctor', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json', },
         body: JSON.stringify(
-            {hospitalID: hospitalIdToUpdate, name: name, location: location }
+            {doctorID: doctorIdToUpdate, name: name, specialization: spec }
         ),
     })
         .then(response => response)
@@ -100,14 +100,14 @@ function update() {
 
 
 function create() {
-    let name = document.getElementById('hospitalname').value;
-    let location = document.getElementById('hospitallocation').value;
+    let name = document.getElementById('doctorname').value;
+    let spec = document.getElementById('doctorspec').value;
 
-    fetch('http://localhost:41147/hospital', {
+    fetch('http://localhost:41147/doctor', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', },
         body: JSON.stringify(
-            { name: name, location: location }
+            { name: name, specialization: spec }
         ),
     })
         .then(response => response)
@@ -119,7 +119,7 @@ function create() {
 }
 
 function remove(id){
-    fetch('http://localhost:41147/hospital/' + id,{
+    fetch('http://localhost:41147/doctor/' + id,{
         method: 'DELETE',
         headers: {'Content-Type': 'application/json',},
         body: null})

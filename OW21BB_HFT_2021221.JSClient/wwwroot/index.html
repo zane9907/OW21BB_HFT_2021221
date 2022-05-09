@@ -8,35 +8,17 @@
 </head>
 
 <body>
-    <h1>Hospital Catalog</h1>
-
-    <div id="formdiv">
-        <label>Hospital Name</label>
-        <input type="text" id="hospitalname"/>
-        <button onclick="create()" type="button">Add Hospital</button>
-    </div>
-
-    <div id="updateformdiv">
-        <label>Hospital Name</label>
-        <input type="text" id="hospitalnametoupdate"/>
-        <button onclick="update()" type="button">Update Hospital</button>
-    </div>
-
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody id="resultarea">
+    <div class="Container">
+        <div class="Left">
+            <img id="logo" src="./Images/logo.bmp" alt="logo" >
+        </div>
+        <div class="Right">
+            <a href="./hospital.html">Manage Hospitals</a>
+            <a href="./doctor.html">Manage Doctors</a>
+            <a href="./patient.html">Manage Patients</a>
             
-        </tbody>
-    </table>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
-    <script src="script.js"></script>
+        </div>
+    </div>
 </body>
 
 </html>
